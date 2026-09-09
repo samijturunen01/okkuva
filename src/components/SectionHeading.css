@@ -1,0 +1,24 @@
+.section-heading {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 58rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+.section-heading--center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.section-heading__title {
+  max-width: 17ch;
+}
+
+.section-heading--center .section-heading__title {
+  max-width: 20ch;
+}
+
+.section-heading .lead {
+  max-width: 58ch;
+}

@@ -1,0 +1,34 @@
+.page-header {
+  position: relative;
+  overflow: clip;
+  padding-top: calc(var(--nav-h) + clamp(3rem, 8vw, 6.5rem));
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.page-header__glow {
+  position: absolute;
+  top: -10%;
+  right: -12%;
+  width: clamp(280px, 48vw, 720px);
+  aspect-ratio: 1;
+  background: var(--grad-glow);
+  filter: blur(36px);
+  opacity: 0.6;
+  pointer-events: none;
+  animation: fade-in 1.2s ease-out both;
+}
+
+.page-header__inner {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.page-header__title {
+  max-width: 15ch;
+  font-size: var(--fs-h1);
+}
+
+.page-header__lead {
+  max-width: 56ch;
+}

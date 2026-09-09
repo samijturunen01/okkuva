@@ -1,0 +1,201 @@
+.pricing-grid {
+  display: grid;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.pricing-card {
+  display: flex;
+  perspective: 1200px;
+}
+
+.pricing-card__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--radius-l);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transform: rotateY(calc(var(--tx, 0) * 5deg)) rotateX(calc(var(--ty, 0) * -5deg));
+  transform-style: preserve-3d;
+  transition:
+    box-shadow 0.5s var(--ease-out),
+    border-color 0.3s ease;
+}
+
+.pricing-card__inner:hover {
+  box-shadow: var(--shadow-l);
+  border-color: rgba(248, 107, 44, 0.45);
+}
+
+.pricing-card__shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at calc(50% + var(--tx, 0) * 45%) calc(50% + var(--ty, 0) * 45%),
+    rgba(248, 138, 47, 0.16),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.pricing-card__inner:hover .pricing-card__shine {
+  opacity: 1;
+}
+
+.pricing-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pricing-card__name {
+  font-size: var(--fs-h4);
+  letter-spacing: -0.02em;
+}
+
+.pricing-card__badge {
+  display: inline-flex;
+  padding: 0.4em 0.8em;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--bg-soft);
+  color: var(--red);
+}
+
+.pricing-card__price {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.pricing-card__amount {
+  font-size: clamp(2.8rem, 5vw, 3.9rem);
+}
+
+.pricing-card__currency {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  color: var(--ink-2);
+}
+
+.pricing-card__vat {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.pricing-card__desc {
+  margin-top: 0.75rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.pricing-card__features {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+.pricing-card__features svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--orange-2);
+}
+
+.pricing-card__cta {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  align-self: stretch;
+  position: relative;
+}
+
+.pricing-card .btn {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* Highlighted (dark) card ------------------------------------------- */
+.pricing-card--highlight .pricing-card__inner {
+  background: var(--dark);
+  color: var(--on-dark);
+  border-color: transparent;
+  box-shadow: var(--shadow-l);
+}
+
+.pricing-card--highlight .pricing-card__badge {
+  background: var(--grad-accent);
+  color: var(--ink);
+}
+
+.pricing-card--highlight .pricing-card__amount {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.pricing-card--highlight .pricing-card__currency,
+.pricing-card--highlight .pricing-card__vat,
+.pricing-card--highlight .pricing-card__desc {
+  color: var(--on-dark-2);
+}
+
+.pricing-card--highlight .pricing-card__features {
+  border-color: var(--line-on-dark);
+}
+
+.pricing-card--highlight .pricing-card__features svg {
+  color: var(--peach);
+}
+
+.pricing-card--highlight .pricing-card__shine {
+  background: radial-gradient(
+    420px circle at calc(50% + var(--tx, 0) * 45%) calc(50% + var(--ty, 0) * 45%),
+    rgba(255, 255, 255, 0.14),
+    transparent 62%
+  );
+}
+
+@media (min-width: 800px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pricing-card--highlight {
+    margin-block: -0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card__inner {
+    transform: none;
+  }
+}

@@ -1,0 +1,173 @@
+/* ------------------------------------------------------------------
+   Glasses mark – layout, pointer reactivity and animations.
+   Coordinates in the keyframes are SVG user units (viewBox 1339 wide).
+   ------------------------------------------------------------------ */
+.glasses {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.glasses__frame,
+.glasses__brow,
+.glasses__brow-idle,
+.glasses__sweep {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.glasses__lens-dark {
+  fill: #2c2c30;
+}
+
+/* Pointer reactivity – --tx / --ty are written by usePointerTilt on an ancestor. */
+.glasses__brows {
+  transform: translate(calc(var(--tx, 0) * 14px), calc(var(--ty, 0) * -18px));
+}
+
+.glasses__glare {
+  transform: translate(calc(var(--tx, 0) * 34px), calc(var(--ty, 0) * 20px));
+}
+
+/* Static variant: no light sweep. */
+.glasses--static .glasses__sweep {
+  display: none;
+}
+
+/* ------------------------------------------------------------------
+   Hero choreography
+   ------------------------------------------------------------------ */
+.glasses--hero .glasses__frame {
+  animation: glasses-frame-in 0.95s var(--ease-spring) 0.1s both;
+}
+
+.glasses--hero .glasses__lens {
+  animation: glasses-lens-ignite 0.9s var(--ease-out) 0.65s both;
+}
+
+.glasses--hero .glasses__lenses-dark {
+  animation: fade-in 0.5s ease-out 0.2s both;
+}
+
+.glasses--hero .glasses__brow--left {
+  animation: glasses-brow-in 0.8s var(--ease-spring) 0.55s both;
+}
+
+.glasses--hero .glasses__brow--right {
+  animation: glasses-brow-in 0.8s var(--ease-spring) 0.68s both;
+}
+
+.glasses--hero .glasses__brow-idle {
+  transform-origin: 15% 60%;
+  animation: glasses-brow-raise 7s ease-in-out 2.8s infinite;
+}
+
+.glasses--hero .glasses__glare {
+  animation: fade-in 0.6s ease-out 1.3s both;
+}
+
+.glasses--hero .glasses__sweep {
+  animation: glasses-sweep 8s var(--ease-in-out) 1.35s infinite;
+}
+
+.glasses--hero .glasses__stop--top {
+  animation: lens-breathe-top 5s ease-in-out 2.5s infinite alternate;
+}
+
+.glasses--hero .glasses__stop--bottom {
+  animation: lens-breathe-bottom 5s ease-in-out 2.5s infinite alternate;
+}
+
+/* Surprised (404) --------------------------------------------------- */
+.glasses--surprised .glasses__brow--left {
+  transform: translateY(-46px) rotate(7deg);
+}
+
+.glasses--surprised .glasses__brow--right {
+  transform: translateY(-46px) rotate(-7deg);
+}
+
+/* Keyframes ----------------------------------------------------------- */
+@keyframes glasses-frame-in {
+  from {
+    opacity: 0;
+    transform: scale(0.84) translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes glasses-lens-ignite {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glasses-brow-in {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes glasses-brow-raise {
+  0%,
+  100% {
+    transform: none;
+  }
+  5% {
+    transform: translateY(-36px) rotate(-5deg);
+  }
+  12% {
+    transform: none;
+  }
+}
+
+@keyframes glasses-sweep {
+  0% {
+    transform: translateX(-420px) skewX(-20deg);
+  }
+  20% {
+    transform: translateX(1500px) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(1500px) skewX(-20deg);
+  }
+}
+
+@keyframes lens-breathe-top {
+  from {
+    stop-color: #f58a2f;
+  }
+  to {
+    stop-color: #ffa63d;
+  }
+}
+
+@keyframes lens-breathe-bottom {
+  from {
+    stop-color: #f74d2c;
+  }
+  to {
+    stop-color: #ec3a2a;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glasses--hero .glasses__sweep {
+    display: none;
+  }
+  .glasses__brows,
+  .glasses__glare {
+    transform: none;
+  }
+}

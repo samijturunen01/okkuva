@@ -1,0 +1,28 @@
+{
+  "name": "okkuva",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "OKKUVA – lyhytvideoita yrityksille. Marketing website built with React + Vite.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build:spa": "vite build",
+    "preview": "vite preview",
+    "media:optimize": "node scripts/optimize-media.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router": "^7.18.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

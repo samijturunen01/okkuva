@@ -1,0 +1,24 @@
+.not-found {
+  min-height: 80svh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--nav-h) + 3rem);
+  padding-bottom: var(--section);
+  text-align: center;
+}
+
+.not-found__inner {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  animation: fade-up 0.8s var(--ease-out) both;
+}
+
+.not-found__glasses {
+  width: clamp(200px, 40vw, 380px);
+  margin-bottom: 1rem;
+}
+
+.not-found h1 {
+  max-width: 14ch;
+}

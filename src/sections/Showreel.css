@@ -1,0 +1,15 @@
+.showreel__head {
+  display: grid;
+  gap: 1rem;
+  align-items: end;
+}
+
+.showreel__link {
+  margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+@media (min-width: 900px) {
+  .showreel__head {
+    grid-template-columns: 1fr auto;
+  }
+}

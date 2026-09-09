@@ -1,0 +1,70 @@
+.reel {
+  position: relative;
+}
+
+.reel__track {
+  --reel-pad: max(var(--gutter), calc(50vw - var(--container) / 2));
+  --reel-gap: clamp(1rem, 2vw, 1.5rem);
+  display: flex;
+  gap: var(--reel-gap);
+  column-gap: var(--reel-gap);
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding: 1rem var(--reel-pad) 1.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--reel-pad);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.reel__item {
+  flex: 0 0 auto;
+  width: min(72vw, 300px);
+  scroll-snap-align: start;
+}
+
+.reel__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.reel__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--line-strong);
+  transition:
+    background-color var(--dur) ease,
+    color var(--dur) ease,
+    transform 0.4s var(--ease-spring),
+    box-shadow var(--dur) ease;
+}
+
+.reel__btn:hover,
+.reel__btn:focus-visible {
+  background: var(--ink);
+  color: #fff;
+  transform: scale(1.06);
+  box-shadow: none;
+}
+
+.reel__btn:focus-visible {
+  box-shadow: var(--focus);
+}
+
+@media (min-width: 720px) {
+  .reel__item {
+    width: clamp(240px, 24vw, 320px);
+  }
+}

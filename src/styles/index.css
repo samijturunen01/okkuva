@@ -1,0 +1,8 @@
+/* Self-hosted variable fonts (GDPR-friendly, no Google Fonts requests). */
+@import '@fontsource-variable/bricolage-grotesque/wght.css';
+@import '@fontsource-variable/instrument-sans/wght.css';
+
+@import './tokens.css';
+@import './base.css';
+@import './utilities.css';
+@import './animations.css';

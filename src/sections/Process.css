@@ -1,0 +1,23 @@
+.process__sheet {
+  padding-block: var(--section);
+}
+
+.process__glow {
+  position: absolute;
+  right: -20%;
+  top: -10%;
+  width: clamp(300px, 55vw, 760px);
+  aspect-ratio: 1;
+  background: var(--grad-glow);
+  filter: blur(50px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.process__inner {
+  position: relative;
+}
+
+.process .section-heading__title {
+  color: var(--on-dark);
+}

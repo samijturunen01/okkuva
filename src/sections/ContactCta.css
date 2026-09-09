@@ -1,0 +1,119 @@
+.contact-cta__sheet {
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.contact-cta__glow {
+  position: absolute;
+  left: -15%;
+  bottom: -40%;
+  width: clamp(320px, 60vw, 820px);
+  aspect-ratio: 1;
+  background: var(--grad-glow);
+  filter: blur(50px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.contact-cta__inner {
+  position: relative;
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.contact-cta__text {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.contact-cta__title {
+  max-width: 14ch;
+  color: var(--on-dark);
+}
+
+.contact-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.contact-cta__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 650;
+  font-size: 1.1rem;
+  color: var(--on-dark);
+}
+
+.contact-cta__phone svg {
+  width: 22px;
+  height: 22px;
+  color: var(--peach);
+}
+
+.contact-cta__phone span {
+  position: relative;
+}
+
+.contact-cta__phone span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--grad-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.contact-cta__phone:hover span::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.contact-cta__visual {
+  position: relative;
+  width: min(100%, 400px);
+  justify-self: center;
+}
+
+.contact-cta__photo {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transform: rotate(2deg);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+  transition: transform 0.6s var(--ease-spring);
+}
+
+.contact-cta__visual:hover .contact-cta__photo {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.contact-cta__photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.contact-cta__sticker {
+  position: absolute;
+  left: -6%;
+  top: 6%;
+  font-size: 1.05rem;
+}
+
+@media (min-width: 900px) {
+  .contact-cta__inner {
+    grid-template-columns: 1.3fr 1fr;
+  }
+
+  .contact-cta__visual {
+    justify-self: end;
+  }
+}

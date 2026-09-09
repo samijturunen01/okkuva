@@ -1,0 +1,14 @@
+.pricing-page__packages {
+  background: var(--bg-tint);
+}
+
+.pricing-page__note {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: var(--fs-lead);
+  color: var(--ink-2);
+}
+
+.pricing-page__note .link-arrow {
+  color: var(--ink);
+}

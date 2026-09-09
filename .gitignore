@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Environment variables (never commit real keys / URLs)
+.env
+.env.local
+.env.*.local
+
+# Original source media kept in the project root (too large for git – the
+# optimized web versions live in public/videos and public/images)
+/*.mov
+/*.MOV
+/*.mp4
+/*.jpg
+/*.jpeg
+/*.png
+/*.heic
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json

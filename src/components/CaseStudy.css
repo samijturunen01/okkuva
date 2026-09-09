@@ -1,0 +1,138 @@
+.case {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border-radius: var(--radius-xl);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-s);
+}
+
+.case + .case {
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.case__header {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+  justify-items: start;
+}
+
+.case__client {
+  font-size: var(--fs-h2);
+}
+
+.case__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip--outline {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+  backdrop-filter: none;
+}
+
+.case__summary {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 48ch;
+}
+
+.case__videos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  align-items: start;
+}
+
+/* Compact preview: two cards on small screens, three from tablet up. */
+@media (max-width: 899px) {
+  .case--compact .case__videos > :nth-child(n + 3) {
+    display: none;
+  }
+}
+
+.case__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.case__metric {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.35rem;
+}
+
+.case__metric dt {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.case__metric dd {
+  margin: 0;
+  display: grid;
+}
+
+.case__metric-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.case__metric-note {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin-top: 0.25rem;
+}
+
+.case__quote {
+  margin: 0;
+  padding: 1.5rem;
+  border-left: 4px solid var(--orange-2);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  background: var(--bg-tint);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lead);
+  line-height: 1.4;
+}
+
+.case__quote footer {
+  margin-top: 0.75rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+
+@media (min-width: 900px) {
+  .case {
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1.45fr);
+    align-items: start;
+  }
+
+  .case__header {
+    position: sticky;
+    top: calc(var(--nav-h) + 1.5rem);
+  }
+
+  .case__metrics,
+  .case__quote {
+    grid-column: 1 / -1;
+  }
+
+  .case--compact .case__videos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

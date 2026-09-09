@@ -1,0 +1,61 @@
+.contact-details {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.contact-details__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-m);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  transition:
+    transform 0.45s var(--ease-out),
+    border-color 0.3s ease,
+    box-shadow 0.45s var(--ease-out);
+}
+
+a.contact-details__item:hover,
+a.contact-details__item:focus-visible {
+  transform: translateX(4px);
+  border-color: rgba(248, 107, 44, 0.5);
+  box-shadow: var(--shadow-m);
+}
+
+.contact-details__icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--grad-accent);
+  color: var(--ink);
+}
+
+.contact-details__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-details__body {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.contact-details__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.contact-details__value {
+  font-weight: 650;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}

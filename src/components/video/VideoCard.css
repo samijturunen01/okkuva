@@ -1,0 +1,140 @@
+.video-card {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+}
+
+.video-card__button {
+  display: block;
+  width: 100%;
+  border-radius: clamp(18px, 8%, 34px);
+  text-align: left;
+  transition: transform 0.55s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.video-card__button:hover {
+  transform: translateY(-6px);
+}
+
+.video-card__button:focus-visible {
+  box-shadow: var(--focus);
+}
+
+.video-card__preview {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.video-card__preview.is-active {
+  opacity: 1;
+}
+
+.video-card__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.28) 0%,
+    rgba(0, 0, 0, 0) 28%,
+    rgba(0, 0, 0, 0) 58%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.video-card__play {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  box-shadow: var(--shadow-m);
+  transition:
+    transform 0.45s var(--ease-spring),
+    background 0.3s ease;
+}
+
+.video-card__play svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 3px;
+}
+
+.video-card__button:hover .video-card__play,
+.video-card__button:focus-visible .video-card__play {
+  transform: scale(1.1);
+  background: var(--grad-accent);
+}
+
+.video-card__duration {
+  position: absolute;
+  z-index: 2;
+  top: 3.2%;
+  right: 5%;
+}
+
+.video-card__caption {
+  position: absolute;
+  z-index: 2;
+  left: 7%;
+  right: 7%;
+  bottom: 6%;
+  display: grid;
+  gap: 0.3rem;
+  color: #fff;
+}
+
+.video-card__kicker {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.video-card__caption .video-card__kicker {
+  opacity: 0.85;
+}
+
+.video-card__caption-title {
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.video-card__meta {
+  display: grid;
+  gap: 0.35rem;
+  padding-inline: 0.25rem;
+}
+
+.video-card__meta .video-card__kicker {
+  color: var(--orange-2);
+}
+
+.video-card__heading {
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.video-card__desc {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-card__button:hover {
+    transform: none;
+  }
+}
