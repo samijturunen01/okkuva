@@ -9,7 +9,7 @@ export const processSteps = [
   },
   {
     number: '02',
-    title: 'Kartoitus',
+    title: 'Ilmainen konsultointikerta',
     subtitle: 'Yritykseen tutustuminen',
     text: 'Tutustumme yritykseesi, tuotteisiisi ja asiakkaisiisi, jotta video puhuu oikeaa kieltä oikealle yleisölle.',
   },

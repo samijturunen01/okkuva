@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useVideoPlayer } from './VideoPlayerContext.jsx'
+import { ReelsOverlay } from './ReelsOverlay.jsx'
 import { publicUrl } from '../../config/site.js'
 import { VIDEO_HEIGHT, VIDEO_WIDTH } from '../../data/videos.js'
 import { PlayIcon } from '../icons.jsx'
@@ -11,6 +12,11 @@ import './VideoCard.css'
  *  - shows the poster image
  *  - on hover (mouse users only) plays a short muted preview
  *  - click opens the full video with sound in the modal player
+ *  - `showMeta` adds the kicker/title/description block under the card; the
+ *    frame itself stays clean (only the Reels overlay on top of the video)
+ *  - shows the Instagram Reels overlay on top of the video: profile row and
+ *    caption bottom left, engagement rail on the right (visual only,
+ *    pointer-events: none, so the whole card stays clickable)
  */
 export function VideoCard({ video, eager = false, showMeta = true, className = '' }) {
   const { open } = useVideoPlayer()
@@ -81,18 +87,13 @@ export function VideoCard({ video, eager = false, showMeta = true, className = '
             )}
             <span className="phone__island" aria-hidden="true" />
             <span className="video-card__shade" aria-hidden="true" />
+            <ReelsOverlay video={video} />
             <span className="video-card__play" aria-hidden="true">
               <PlayIcon />
             </span>
             {video.duration && (
               <span className="video-card__duration chip chip--dark" aria-hidden="true">
                 {video.duration}
-              </span>
-            )}
-            {!showMeta && (
-              <span className="video-card__caption" aria-hidden="true">
-                {video.kicker && <span className="video-card__kicker">{video.kicker}</span>}
-                <span className="video-card__caption-title">{video.title}</span>
               </span>
             )}
           </span>

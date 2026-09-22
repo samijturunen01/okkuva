@@ -5,7 +5,7 @@ export const site = {
   name: 'OKKUVA',
   tagline: 'Videoita, jotka pysäyttävät scrollaamisen.',
   shortDescription: 'Lyhytvideoita yrityksille – käsikirjoitus, kuvaus, juonto ja editointi yhdellä hinnalla.',
-  email: 'danielsilkin@icloud.com',
+  email: 'okkuvalle@gmail.com',
   phone: '044 578 8262',
   /** International format for tel: links. */
   phoneHref: 'tel:+358445788262',

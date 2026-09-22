@@ -2,7 +2,7 @@
 
 The contact form on `/ota-yhteytta` sends a JSON POST request to a Google Apps
 Script Web App. The script validates the data, verifies the reCAPTCHA v3 token
-with Google, emails the message to **danielsilkin@icloud.com** and optionally
+with Google, emails the message to **okkuvalle@gmail.com** and optionally
 appends a row to a Google Sheet.
 
 No secrets are stored in the website. The reCAPTCHA **secret** key lives only in
@@ -26,7 +26,7 @@ the Apps Script project's Script properties.
    | Property            | Value                                              | Required |
    | ------------------- | -------------------------------------------------- | -------- |
    | `RECAPTCHA_SECRET`  | the reCAPTCHA **secret** key                       | yes      |
-   | `TO_EMAIL`          | `danielsilkin@icloud.com`                          | no (default) |
+   | `TO_EMAIL`          | `okkuvalle@gmail.com`                               | no (default) |
    | `SHEET_ID`          | id of a Google Sheet to log submissions into       | no       |
    | `ALLOWED_HOSTNAMES` | `okkuva.fi,www.okkuva.fi` (comma separated)        | no       |
    | `MIN_SCORE`         | `0.5` – reject tokens with a lower reCAPTCHA score | no       |

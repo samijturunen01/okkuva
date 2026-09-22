@@ -12,7 +12,7 @@ import './ContactCta.css'
  * Closing call-to-action block used on several pages.
  */
 export function ContactCta({
-  title = 'Pysäytetäänkö sinunkin asiakkaidesi scrollaus?',
+  title = 'Varaa ilmainen konsultointikerta',
   highlight = ['scrollaus'],
   lead = 'Laita viestiä tai soita. Jutellaan, miten videot toimisivat juuri sinun yrityksellesi.',
 }) {
@@ -48,7 +48,7 @@ export function ContactCta({
                 src={portrait}
                 srcSet={`${portrait} 800w, ${portrait2x} 1400w`}
                 sizes="(min-width: 900px) 400px, 80vw"
-                alt="OKKUVAn videontekijä oransseissa aurinkolaseissa tarrojen peittämän oven edessä"
+                alt="OKKUVAn videontekijä oransseissa aurinkolaseissa puukirkon juurakkoalttarin edessä"
                 width="800"
                 height="1000"
                 loading="lazy"

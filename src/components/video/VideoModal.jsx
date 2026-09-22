@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useVideoPlayer } from './VideoPlayerContext.jsx'
+import { ReelsOverlay } from './ReelsOverlay.jsx'
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll.js'
 import { publicUrl } from '../../config/site.js'
 import { CloseIcon } from '../icons.jsx'
@@ -9,6 +10,10 @@ import './VideoModal.css'
 /**
  * Phone-shaped modal player built on the native <dialog> element
  * (focus trapping, Escape and backdrop come for free).
+ *
+ * The Instagram Reels overlay (profile row, caption and the engagement rail)
+ * is rendered inside the enlarged player too, so it stays attached to the
+ * video and scales with it.
  */
 export function VideoModal() {
   const { current, close } = useVideoPlayer()
@@ -76,6 +81,7 @@ export function VideoModal() {
               preload="metadata"
               poster={current ? publicUrl(current.poster) : undefined}
             />
+            {current && <ReelsOverlay video={current} variant="modal" />}
           </div>
         </div>
         <div className="video-modal__caption">

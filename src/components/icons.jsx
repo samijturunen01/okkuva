@@ -119,6 +119,40 @@ export const PhoneIcon = (props) => (
   </svg>
 )
 
+export const HeartIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M12 20.4C7.2 17.3 3.5 14.2 3.5 10.3A4.8 4.8 0 0 1 12 7.2a4.8 4.8 0 0 1 8.5 3.1c0 3.9-3.7 7-8.5 10.1Z" />
+  </svg>
+)
+
+export const CommentIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M12 3.6c4.9 0 8.6 3.2 8.6 7.5s-3.7 7.5-8.6 7.5a10 10 0 0 1-2.6-.33L4.6 20.4l1.1-3.6A7.2 7.2 0 0 1 3.4 11c0-4.3 3.7-7.4 8.6-7.4Z" />
+  </svg>
+)
+
+export const ShareIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M21 3.6 2.9 9.9a.35.35 0 0 0 0 .66l7.5 2.7 2.7 7.5a.35.35 0 0 0 .66 0L21 3.6Z" />
+    <path d="m10.4 13.3 4.5-4.5" />
+  </svg>
+)
+
+export const BookmarkIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M6 3.7h12a.8.8 0 0 1 .8.8v15.3L12 15.6l-6.8 4.2V4.5a.8.8 0 0 1 .8-.8Z" />
+  </svg>
+)
+
+/** Vertical "…" menu, as on the Instagram Reels action rail. */
+export const MoreIcon = (props) => (
+  <svg {...base} fill="currentColor" stroke="none" {...props}>
+    <circle cx="12" cy="5" r="1.9" />
+    <circle cx="12" cy="12" r="1.9" />
+    <circle cx="12" cy="19" r="1.9" />
+  </svg>
+)
+
 export const SparkIcon = (props) => (
   <svg {...base} fill="currentColor" stroke="none" {...props}>
     <path d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7L12 2Z" />
@@ -141,6 +175,11 @@ const byName = {
   mail: MailIcon,
   phone: PhoneIcon,
   spark: SparkIcon,
+  heart: HeartIcon,
+  comment: CommentIcon,
+  share: ShareIcon,
+  bookmark: BookmarkIcon,
+  more: MoreIcon,
 }
 
 /** Render an icon by name (used by data files). */

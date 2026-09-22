@@ -1,0 +1,206 @@
+/* ------------------------------------------------------------------
+   Instagram Reels -tyylinen kerros videon päällä.
+
+   Renderöidään .phone__screen -elementin sisään sekä kortilla että
+   modaalissa, joten kerros skaalautuu ja liikkuu videon mukana. Kaikki koot
+   tulevat container query -yksiköistä (.phone on container, ks. Phone.css),
+   jolloin sama kerros toimii pienellä korttikuvalla ja suurennetussa
+   näkymässä – ilman erillisiä media query -katkoja.
+
+   Koko kerros on pointer-events: none, joten kortin klikkaus (ja modaalin
+   omat videokontrollit) toimivat kerroksen läpi.
+   ------------------------------------------------------------------ */
+.reels {
+  /* Ikonit ja tekstit */
+  --reels-icon: clamp(13px, 6.6cqw, 26px);
+  --reels-count: clamp(8px, 3.3cqw, 13px);
+  --reels-handle: clamp(8px, 3.6cqw, 14px);
+  --reels-caption: clamp(8px, 3.4cqw, 13px);
+  /* Neliömerkki ja profiilikuva */
+  --reels-badge: clamp(17px, 8cqw, 32px);
+  --reels-avatar: clamp(17px, 8cqw, 32px);
+  /* Välit ja reunuksien etäisyydet */
+  --reels-rail-gap: clamp(6px, 3.3cqw, 15px);
+  --reels-col-gap: clamp(6px, 3cqw, 14px);
+  --reels-pad-x: clamp(6px, 3.6cqw, 14px);
+  --reels-pad-b: clamp(8px, 4.4cqw, 18px);
+  --reels-hairline: clamp(1px, 0.45cqw, 1.6px);
+
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--reels-col-gap);
+  padding: 0 var(--reels-pad-x) var(--reels-pad-b);
+  color: #fff;
+  font-family: var(--font-body);
+  line-height: 1.2;
+  pointer-events: none; /* klikkaus menee läpi videon avaustoiminnolle */
+  user-select: none;
+}
+
+/* ------------------------------------------------------------------
+   Oikea reuna: sydän / kommentti / jako / tallennus + luvut, kolme
+   pistettä ja alimpana neliön muotoinen tilimerkki.
+   ------------------------------------------------------------------ */
+.reels__rail {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  gap: var(--reels-rail-gap);
+  /* Merkki jää suunnilleen käyttäjätunnuksen tasolle, kuten Reelsissä. */
+  padding-bottom: calc(var(--reels-caption) * 1.5);
+}
+
+.reels__action {
+  display: grid;
+  justify-items: center;
+  gap: 0.22em;
+  /* Tumma hehku pitää ikonit luettavina myös vaalealla videolla. */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 6px rgba(0, 0, 0, 0.35));
+}
+
+.reels__icon {
+  display: block;
+  width: var(--reels-icon);
+  height: var(--reels-icon);
+  stroke-width: 1.7;
+}
+
+.reels__icon--more {
+  width: calc(var(--reels-icon) * 0.8);
+  height: calc(var(--reels-icon) * 0.8);
+}
+
+.reels__count {
+  font-size: var(--reels-count);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.reels__badge {
+  box-sizing: border-box;
+  display: block;
+  width: var(--reels-badge);
+  height: var(--reels-badge);
+  overflow: hidden;
+  border: var(--reels-hairline) solid #fff;
+  border-radius: calc(var(--reels-badge) * 0.22);
+  background: #0b0b0c;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.reels__badge-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------------
+   Vasen alareuna: profiilikuva, käyttäjätunnus, "Seuraa" ja kuvateksti.
+   ------------------------------------------------------------------ */
+.reels__profile {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  gap: clamp(3px, 1.5cqw, 7px);
+  justify-items: start;
+}
+
+.reels__user {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 2.2cqw, 9px);
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Ei valkoista reunusta – vain pehmeä varjo erottamassa vaaleasta videosta.
+   (Oikean reunan neliömerkillä .reels__badge on reunus, kuten Reelsissä.) */
+.reels__avatar {
+  flex: 0 0 auto;
+  width: var(--reels-avatar);
+  height: var(--reels-avatar);
+  border-radius: 50%;
+  object-fit: cover;
+  background: #0b0b0c;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.reels__handle {
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--reels-handle);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.reels__follow {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  padding: clamp(2px, 1cqw, 5px) clamp(5px, 2.6cqw, 11px);
+  border: var(--reels-hairline) solid rgba(255, 255, 255, 0.85);
+  border-radius: clamp(4px, 1.6cqw, 8px);
+  background: rgba(0, 0, 0, 0.28);
+  font-size: calc(var(--reels-handle) * 0.94);
+  font-weight: 650;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.reels__caption {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  max-width: 100%;
+  font-size: var(--reels-caption);
+  font-weight: 450;
+  line-height: 1.32;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  overflow-wrap: anywhere;
+}
+
+/* Kapeilla korteilla (esim. kaksi korttia rinnakkain puhelimessa) tiivistetään
+   hieman, jotta profiiliosa ei peitä liikaa videosta eikä mikään mene päällekkäin. */
+@container phone (max-width: 210px) {
+  .reels {
+    --reels-handle: 7.5px;
+    --reels-rail-gap: 5px;
+    --reels-col-gap: 5px;
+  }
+
+  .reels__caption {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+}
+
+/* Modaalissa video on suurempi ja siinä on natiivikontrollit alareunassa –
+   nostetaan koko kerrosta, jottei se jää kontrollipalkin alle. */
+.reels--modal {
+  --reels-pad-b: clamp(46px, 14cqw, 62px);
+}
+
+/* Kortilla luettavuudesta huolehtii .video-card__shade; modaalissa kerros on
+   suoraan videon päällä, joten lisätään sama pehmeä tummennus alareunaan. */
+.reels--modal::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+}

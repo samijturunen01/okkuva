@@ -110,11 +110,32 @@ Then add an entry to `src/data/videos.js`:
   src: 'videos/kesakampanja-2026.mp4',
   preview: 'videos/kesakampanja-2026-preview.mp4',
   poster: 'videos/kesakampanja-2026-poster.webp',
+  // Valinnainen: Instagramin todelliset luvut videon päälle (Reels-tyylinen
+  // kerros). Jätä pois, jos lukuja ei ole.
+  stats: { likes: 1234, comments: 56, shares: 78, saves: 90 },
+  // Valinnainen: kuvatekstin ensimmäinen rivi, näkyy käyttäjätunnuksen alla.
+  // Pidä lyhyenä ja päätä "…"-merkkiin kuten Instagramissa – tilaa on 1–2 riviä.
+  caption: 'Lyhyt kuvaus somessa, …',
 },
 ```
 
 The home page reel shows every video in that list. To remove a video, delete
 its entry (and the files).
+
+### Instagram Reels -kerros
+
+Jokaisen videon päälle piirretään Reels-tyylinen käyttöliittymä
+(`src/components/video/ReelsOverlay.jsx`): oikeassa reunassa sydän, kommentti,
+jako, tallennus + luvut, kolme pistettä ja tilin neliömerkki, vasemmassa
+alareunassa profiilikuva, käyttäjätunnus, "Seuraa" ja kuvateksti. Sama kerros
+renderöidään sekä kortille että suurennettuun modaalisoittimeen, ja se on
+kokonaan `pointer-events: none` – klikkaus menee aina läpi videon avaamiseen.
+
+Tili (käyttäjätunnus ja logo) tulee `reelsAccount`-objektista
+`src/data/videos.js`:ssä. Logo on `public/brand/visitkarelia-logo.jpg`
+(neliö, 150×150 tai isompi); korvaa tiedosto tai osoita `mark` toiseen
+tiedostoon, niin merkki vaihtuu sekä profiilikuvaan että oikean reunan
+neliöön. Käytä tiedostonimessä vain pieniä kirjaimia ja väliviivoja.
 
 > The original `.mov` files in the project root are ignored by git (see
 > `.gitignore`) – only the optimized versions in `public/videos` are deployed.

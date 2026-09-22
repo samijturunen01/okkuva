@@ -29,7 +29,7 @@ export default function Results() {
         </div>
       </section>
 
-      <ContactCta title="Seuraavaksi tähän listalle?" highlight={['listalle']} />
+      <ContactCta title="Varaa ensimmäinen konsultointikerta täysin ilmaiseksi." highlight={['ilmaiseksi']} />
     </>
   )
 }
