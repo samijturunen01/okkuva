@@ -11,7 +11,7 @@ export const processSteps = [
     number: '02',
     title: 'Ilmainen konsultointikerta',
     subtitle: 'Yritykseen tutustuminen',
-    text: 'Tutustumme yritykseesi, kohderyhmääsi sekä palveluusi tai tuotteesi ja katsotaan millainen markkinointikampanja pukisi sitä juuri nyt.',
+    text: 'Tutustumme yritykseesi, kohderyhmääsi sekä palveluusi tai tuotteeseesi ja katsotaan millainen markkinointikampanja pukisi sitä juuri nyt.',
   },
   {
     number: '03',
