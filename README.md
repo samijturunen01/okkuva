@@ -212,7 +212,7 @@ The repository includes `.github/workflows/deploy.yml`.
 3. **Settings → Secrets and variables → Actions → Variables** – add:
    `VITE_SITE_URL`, `VITE_APPS_SCRIPT_URL`, `VITE_RECAPTCHA_SITE_KEY`
    (and `CUSTOM_DOMAIN`, e.g. `okkuva.fi`, if you use one – the workflow then
-   writes the `CNAME` file and builds with `BASE_PATH=/`).
+   writes the `CNAME` file and builds with `BASE_PATH=/`; see section 9).
 4. Push to `main` – the workflow builds and publishes `dist/`.
 
 The workflow picks the base path automatically: `/<repo>/` for a project site
@@ -221,6 +221,56 @@ a custom domain.
 
 Manual deployment works too: `BASE_PATH=/okkuva/ npm run build` and upload the
 `dist/` folder (it contains a `.nojekyll` file).
+
+## 9. Custom domain: okkuva.fi (Cloudflare DNS)
+
+The site is published at **https://okkuva.fi**. GitHub Pages hosts the files,
+Cloudflare answers the DNS queries for the domain.
+
+Already configured in the repository (nothing to redo):
+
+| Setting | Value |
+| ------- | ----- |
+| Actions variable `CUSTOM_DOMAIN` | `okkuva.fi` (workflow writes `dist/CNAME`) |
+| Actions variable `VITE_SITE_URL` | `https://okkuva.fi` (canonical, OG, sitemap) |
+| Settings → Pages → Custom domain | `okkuva.fi` |
+
+### DNS records in Cloudflare
+
+Apex (`okkuva.fi`) must be A/AAAA records pointing at GitHub's Pages servers;
+`www` is a CNAME. GitHub redirects `www.okkuva.fi` → `okkuva.fi` automatically.
+
+| Type  | Name | Content                    | Proxy    |
+| ----- | ---- | -------------------------- | -------- |
+| A     | @    | 185.199.108.153            | DNS only |
+| A     | @    | 185.199.109.153            | DNS only |
+| A     | @    | 185.199.110.153            | DNS only |
+| A     | @    | 185.199.111.153            | DNS only |
+| AAAA  | @    | 2606:50c0:8000::153        | DNS only |
+| AAAA  | @    | 2606:50c0:8001::153        | DNS only |
+| AAAA  | @    | 2606:50c0:8002::153        | DNS only |
+| AAAA  | @    | 2606:50c0:8003::153        | DNS only |
+| CNAME | www  | samijturunen01.github.io   | DNS only |
+
+Two Cloudflare settings matter:
+
+- **Proxy status must be "DNS only" (grey cloud)**, at least until GitHub has
+  issued the certificate. With the orange cloud on, GitHub cannot complete the
+  Let's Encrypt challenge and HTTPS stays broken.
+- **SSL/TLS → Overview → "Full"**, never "Flexible". Flexible + GitHub Pages
+  produces an infinite redirect loop.
+
+GitHub Pages already serves HTTPS and HTTP/2 with a global CDN, so the
+Cloudflare proxy adds little here. Leaving everything on "DNS only" is the
+recommended setup.
+
+### After DNS resolves
+
+1. **Settings → Pages → Enforce HTTPS** – tick it once GitHub reports the
+   certificate as issued (can take up to an hour after the DNS change).
+2. Optional but recommended: **Settings → Pages → Verify domain** to protect
+   `okkuva.fi` against takeover. GitHub gives a TXT record
+   (`_github-pages-challenge-samijturunen01`) to add in Cloudflare.
 
 ## Editing tips
 
