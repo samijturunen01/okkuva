@@ -2,7 +2,7 @@
  * Packages and prices. Prices are shown exactly as written here.
  * `perVideo` is the price divided by the number of videos (shown as info only).
  */
-export const VAT_NOTE = 'sis. ALV'
+export const VAT_NOTE = '+ ALV'
 
 export const packages = [
   {

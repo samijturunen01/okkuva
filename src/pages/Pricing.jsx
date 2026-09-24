@@ -16,7 +16,7 @@ export default function Pricing() {
   useSeo({
     title: 'Hinnasto',
     description:
-      'OKKUVAn lyhytvideoiden hinnat: 1 video 149,90 €, 3 videota 399,90 € ja 6 videota 699,90 € sis. ALV. Jokainen video sisältää kuvauksen, käsikirjoituksen, juonnon ja editoinnin.',
+      'OKKUVAn lyhytvideoiden hinnat: 1 video 149,90 €, 3 videota 399,90 € ja 6 videota 699,90 € + ALV. Jokainen video sisältää kuvauksen, käsikirjoituksen, juonnon ja editoinnin.',
     path: '/hinnasto',
   })
 
@@ -48,7 +48,7 @@ export default function Pricing() {
             eyebrow="Paketit"
             title="Valitse videoiden määrä."
             highlight={['määrä']}
-            lead="Jokainen paketti sisältää kaikki yllä listatut asiat. Hinnat sis. ALV."
+            lead="Jokainen paketti sisältää kaikki yllä listatut asiat. Hinnat + ALV."
           />
           <div className="pricing-grid">
             {packages.map((pkg, i) => (
