@@ -119,6 +119,14 @@ export const PhoneIcon = (props) => (
   </svg>
 )
 
+export const InstagramIcon = (props) => (
+  <svg {...base} {...props}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+  </svg>
+)
+
 export const HeartIcon = (props) => (
   <svg {...base} {...props}>
     <path d="M12 20.4C7.2 17.3 3.5 14.2 3.5 10.3A4.8 4.8 0 0 1 12 7.2a4.8 4.8 0 0 1 8.5 3.1c0 3.9-3.7 7-8.5 10.1Z" />

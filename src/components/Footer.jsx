@@ -1,5 +1,5 @@
 import { AppLink } from './AppLink.jsx'
-import { MailIcon, PhoneIcon } from './icons.jsx'
+import { InstagramIcon, MailIcon, PhoneIcon } from './icons.jsx'
 import { nav, site } from '../data/site.js'
 import logo from '../assets/okkuva-logo.png'
 import logo2x from '../assets/okkuva-logo@2x.png'
@@ -41,6 +41,10 @@ export function Footer() {
           <a href={site.phoneHref} className="footer__link">
             <PhoneIcon />
             <span>{site.phone}</span>
+          </a>
+          <a href={site.instagramHref} className="footer__link" target="_blank" rel="noopener noreferrer">
+            <InstagramIcon />
+            <span>@{site.instagram}</span>
           </a>
           <p className="footer__meta">Y-tunnus {site.businessId}</p>
         </address>
