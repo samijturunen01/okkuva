@@ -10,6 +10,9 @@ export const site = {
   /** International format for tel: links. */
   phoneHref: 'tel:+358445788262',
   businessId: '3457728-9',
+  /** Shown under the portrait in the contact CTA and on the contact page. */
+  founderIntro:
+    'Moro! Olen Daniel, Okkuvan perustaja. Miut saattaa nähdä tuolla somen puolella välillä vilahdukseltaan tai sitten useamminkin, jos kontenttini kiinnostaa. Tykkään tehdä viihdyttävää sisältöä ja sitä kautta jeesaa yrityksiä näkyvyyden kanssa. Ota rohkeasti yhteyttä, niin katsotaan mitä keksitään 🎬',
 }
 
 export const nav = [

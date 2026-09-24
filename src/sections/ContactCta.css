@@ -77,10 +77,15 @@
   transform-origin: left;
 }
 
-.contact-cta__visual {
-  position: relative;
+.contact-cta__side {
+  display: grid;
+  gap: 1.75rem;
   width: min(100%, 400px);
   justify-self: center;
+}
+
+.contact-cta__visual {
+  position: relative;
 }
 
 .contact-cta__photo {
@@ -108,12 +113,17 @@
   font-size: 1.05rem;
 }
 
+.contact-cta__intro {
+  color: var(--on-dark-2);
+  line-height: var(--lh-body);
+}
+
 @media (min-width: 900px) {
   .contact-cta__inner {
     grid-template-columns: 1.3fr 1fr;
   }
 
-  .contact-cta__visual {
+  .contact-cta__side {
     justify-self: end;
   }
 }

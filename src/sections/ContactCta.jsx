@@ -42,23 +42,28 @@ export function ContactCta({
             </Reveal>
           </div>
 
-          <Reveal className="contact-cta__visual" variant="scale" delay={200}>
-            <div className="contact-cta__photo">
-              <img
-                src={portrait}
-                srcSet={`${portrait} 800w, ${portrait2x} 1400w`}
-                sizes="(min-width: 900px) 400px, 80vw"
-                alt="OKKUVAn videontekijä oransseissa aurinkolaseissa puukirkon juurakkoalttarin edessä"
-                width="800"
-                height="1000"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <Sticker className="contact-cta__sticker" tone="accent" rotate={-8}>
-              Moikka 👋
-            </Sticker>
-          </Reveal>
+          <div className="contact-cta__side">
+            <Reveal className="contact-cta__visual" variant="scale" delay={200}>
+              <div className="contact-cta__photo">
+                <img
+                  src={portrait}
+                  srcSet={`${portrait} 800w, ${portrait2x} 1400w`}
+                  sizes="(min-width: 900px) 400px, 80vw"
+                  alt="OKKUVAn videontekijä oransseissa aurinkolaseissa puukirkon juurakkoalttarin edessä"
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <Sticker className="contact-cta__sticker" tone="accent" rotate={-8}>
+                Moikka 👋
+              </Sticker>
+            </Reveal>
+            <Reveal as="p" className="contact-cta__intro" delay={280}>
+              {site.founderIntro}
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

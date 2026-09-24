@@ -57,6 +57,9 @@ export default function Contact() {
                 Vastaamme itse 📞
               </Sticker>
             </Reveal>
+            <Reveal as="p" className="contact-page__intro" delay={320}>
+              {site.founderIntro}
+            </Reveal>
           </div>
 
           <div className="contact-page__form">

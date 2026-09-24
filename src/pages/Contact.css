@@ -38,6 +38,12 @@
   top: 5%;
 }
 
+.contact-page__intro {
+  max-width: 360px;
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+}
+
 .contact-page__form {
   display: grid;
   gap: 1.5rem;
