@@ -5,8 +5,6 @@ import { Button } from './Button.jsx'
 import { MobileMenu } from './MobileMenu.jsx'
 import { CONTACT_PATH, nav } from '../data/site.js'
 
-const linkItems = nav.filter((item) => !item.cta)
-const ctaItem = nav.find((item) => item.cta) || { to: CONTACT_PATH, label: 'Ota yhteyttä' }
 import logo from '../assets/okkuva-logo.png'
 import logo2x from '../assets/okkuva-logo@2x.png'
 import './Navbar.css'
@@ -46,7 +44,7 @@ export function Navbar() {
 
           <nav className="navbar__nav" aria-label="Päävalikko">
             <ul className="navbar__list">
-              {linkItems.map((item) => (
+              {nav.map((item) => (
                 <li key={item.to}>
                   <AppLink
                     nav
@@ -62,8 +60,8 @@ export function Navbar() {
           </nav>
 
           <div className="navbar__actions">
-            <Button to={ctaItem.to} variant="accent" size="sm" className="navbar__cta">
-              {ctaItem.label}
+            <Button to={CONTACT_PATH} variant="accent" size="sm" className="navbar__cta">
+              Ota yhteyttä
             </Button>
             <button
               ref={toggleRef}

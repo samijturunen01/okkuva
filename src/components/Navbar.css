@@ -355,7 +355,10 @@
   .navbar__logo img {
     height: 54px;
   }
+}
 
+/* Five links + the CTA need a little more room than the logo bump above. */
+@media (min-width: 1000px) {
   .navbar__nav {
     display: block;
     position: absolute;

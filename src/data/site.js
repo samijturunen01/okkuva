@@ -45,15 +45,15 @@ export const CONTACT_PATH = '/ota-yhteytta'
 export const contactPath = (inquiry) => (inquiry ? `${CONTACT_PATH}?aihe=${inquiry}` : CONTACT_PATH)
 
 /**
- * Main navigation. `cta: true` renders the item as the highlighted button on
- * the right of the desktop header instead of a plain link.
+ * Main navigation. The highlighted "Ota yhteyttä" button on the right of the
+ * header (and at the bottom of the mobile menu) is separate from these links.
  */
 export const nav = [
   { to: HOME_PATH, label: 'Etusivu', end: true },
   { to: VIDEOS_PATH, label: 'Videot & konseptit' },
   { to: COLLAB_PATH, label: 'Yhteistyöt' },
   { to: ABOUT_PATH, label: 'Danielista' },
-  { to: CONTACT_PATH, label: 'Ota yhteyttä', cta: true },
+  { to: CONTACT_PATH, label: 'Yhteystiedot' },
 ]
 
 /**
