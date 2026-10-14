@@ -36,7 +36,13 @@ var CONFIG = {
     phone: { max: 30 },
     message: { min: 10, max: 2000 },
   },
-  PACKAGES: { 1: '1 video', 3: '3 videota', 6: '6 videota', other: 'Muu / en tiedä vielä' },
+  // Inquiry types ("Aihe") – keep in sync with INQUIRY_TYPES in src/lib/contact.js.
+  INQUIRY_TYPES: {
+    yhteistyo: 'Kaupallinen yhteistyö',
+    videotuotanto: 'Videotuotanto',
+    tarina: 'Ehdota tarinaa',
+    muu: 'Muu asia',
+  },
 }
 
 /* ------------------------------------------------------------------ */
@@ -110,7 +116,7 @@ function validatePayload(payload) {
     company: str(payload.company, 500),
     email: str(payload.email, 500),
     phone: str(payload.phone, 500),
-    package: str(payload.package, 20),
+    inquiry: str(payload.inquiry, 40),
     message: str(payload.message, 5000),
   }
 
@@ -118,7 +124,7 @@ function validatePayload(payload) {
   if (data.company.length > L.company.max) errors.push('company')
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email) || data.email.length > L.email.max) errors.push('email')
   if (data.phone && (!/^[+\d][\d\s()-]{5,}$/.test(data.phone) || data.phone.length > L.phone.max)) errors.push('phone')
-  if (data.package && !CONFIG.PACKAGES.hasOwnProperty(data.package)) errors.push('package')
+  if (data.inquiry && !CONFIG.INQUIRY_TYPES.hasOwnProperty(data.inquiry)) errors.push('inquiry')
   if (data.message.length < L.message.min || data.message.length > L.message.max) errors.push('message')
   if (!payload.token || typeof payload.token !== 'string' || payload.token.length > 5000) errors.push('token')
 
@@ -196,15 +202,15 @@ function escapeHtml(value) {
 
 function sendEmail(data, captcha, page) {
   var to = PropertiesService.getScriptProperties().getProperty('TO_EMAIL') || CONFIG.DEFAULT_TO_EMAIL
-  var packageLabel = data.package ? CONFIG.PACKAGES[data.package] : '–'
+  var inquiryLabel = data.inquiry ? CONFIG.INQUIRY_TYPES[data.inquiry] : '–'
   var subject = CONFIG.SUBJECT_PREFIX + ': ' + data.name + (data.company ? ' (' + data.company + ')' : '')
 
   var rows = [
+    ['Aihe', inquiryLabel],
     ['Nimi', data.name],
     ['Yritys', data.company || '–'],
     ['Sähköposti', data.email],
     ['Puhelin', data.phone || '–'],
-    ['Kiinnostava paketti', packageLabel],
   ]
 
   var plain =
@@ -266,7 +272,7 @@ function appendToSheet(data, captcha, page) {
   try {
     var sheet = SpreadsheetApp.openById(sheetId).getSheets()[0]
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Aika', 'Nimi', 'Yritys', 'Sähköposti', 'Puhelin', 'Paketti', 'Viesti', 'reCAPTCHA', 'Sivu'])
+      sheet.appendRow(['Aika', 'Nimi', 'Yritys', 'Sähköposti', 'Puhelin', 'Aihe', 'Viesti', 'reCAPTCHA', 'Sivu'])
     }
     sheet.appendRow([
       new Date(),
@@ -274,7 +280,7 @@ function appendToSheet(data, captcha, page) {
       cell(data.company),
       cell(data.email),
       cell(data.phone),
-      data.package ? CONFIG.PACKAGES[data.package] : '',
+      data.inquiry ? CONFIG.INQUIRY_TYPES[data.inquiry] : '',
       cell(data.message),
       captcha.score !== undefined ? captcha.score : '',
       cell(page || ''),

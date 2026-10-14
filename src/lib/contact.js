@@ -38,31 +38,13 @@ export const INQUIRY_TYPES = [
 
 export const inquiryById = Object.fromEntries(INQUIRY_TYPES.map((t) => [t.id, t]))
 
-/**
- * The inquiry type is sent as the first line of the message, so it reaches the
- * inbox with the backend as it is deployed today (the Apps Script only emails
- * the fields it knows). It is also sent separately as `inquiry`.
- */
-const inquiryPrefix = (type) => `Aihe: ${type.label}\n\n`
-const PREFIX_RESERVE = Math.max(...INQUIRY_TYPES.map((t) => inquiryPrefix(t).length))
-
-/** Server-side message limit (apps-script/Code.gs). */
-const SERVER_MESSAGE_MAX = 2000
-
+/** Same limits as the Apps Script backend (apps-script/Code.gs). */
 export const LIMITS = {
   name: { min: 2, max: 80 },
   company: { max: 100 },
   email: { max: 120 },
   phone: { max: 30 },
-  // Leaves room for the "Aihe: …" line within the server's limit.
-  message: { min: 10, max: SERVER_MESSAGE_MAX - PREFIX_RESERVE },
-}
-
-/** Message text as sent to the backend: inquiry type first, then the visitor's text. */
-export function composeMessage(values) {
-  const type = inquiryById[values.inquiry]
-  const message = values.message.trim()
-  return type ? `${inquiryPrefix(type)}${message}` : message
+  message: { min: 10, max: 2000 },
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/

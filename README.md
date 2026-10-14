@@ -213,9 +213,10 @@ rate limits, escapes all content in the email and returns JSON.
 
 The form's required inquiry type (Kaupallinen yhteistyö / Videotuotanto /
 Ehdota tarinaa / Muu asia, `INQUIRY_TYPES` in `src/lib/contact.js`) is sent as
-the first line of the message (`Aihe: …`), so it reaches the inbox with the
-script exactly as it is deployed – no redeploy needed. It is also sent as a
-separate `inquiry` field, which the current script ignores.
+the `inquiry` field and shown as **Aihe** in the notification email. The script
+has its own copy of the list (`CONFIG.INQUIRY_TYPES` in `apps-script/Code.gs`)
+and rejects unknown ids, so keep the two in sync and redeploy the script when
+the list changes.
 
 ## 6. reCAPTCHA v3
 
