@@ -4,7 +4,6 @@ import { Marquee } from '../components/Marquee.jsx'
 import { Showreel } from '../sections/Showreel.jsx'
 import { Process } from '../sections/Process.jsx'
 import { Included } from '../sections/Included.jsx'
-import { PricingPreview } from '../sections/PricingPreview.jsx'
 import { ResultsPreview } from '../sections/ResultsPreview.jsx'
 import { ContactCta } from '../sections/ContactCta.jsx'
 
@@ -29,7 +28,6 @@ export default function Home() {
       <Showreel />
       <Process />
       <Included />
-      <PricingPreview />
       <ResultsPreview />
       <ContactCta />
     </>

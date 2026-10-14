@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react'
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import { Navbar } from './components/Navbar.jsx'
 import { Footer } from './components/Footer.jsx'
 import { SkipLink } from './components/SkipLink.jsx'
@@ -7,6 +7,7 @@ import { ScrollManager } from './components/ScrollManager.jsx'
 import { VideoPlayerProvider } from './components/video/VideoPlayerContext.jsx'
 import { VideoModal } from './components/video/VideoModal.jsx'
 import { pages, preloadAllRoutes } from './routes.jsx'
+import { LEGACY_PRICING_PATH, LEGACY_PRICING_REDIRECT } from './data/site.js'
 
 function PageFallback() {
   return <div className="page-fallback" aria-hidden="true" />
@@ -32,7 +33,7 @@ export default function App() {
         <Suspense fallback={<PageFallback />}>
           <Routes>
             <Route path="/" element={<pages.Home />} />
-            <Route path="/hinnasto" element={<pages.Pricing />} />
+            <Route path={LEGACY_PRICING_PATH} element={<Navigate to={LEGACY_PRICING_REDIRECT} replace />} />
             <Route path="/tulokset" element={<pages.Results />} />
             <Route path="/ota-yhteytta" element={<pages.Contact />} />
             <Route path="*" element={<pages.NotFound />} />

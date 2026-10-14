@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router'
 import { useSeo } from '../hooks/useSeo.js'
 import { PageHeader } from '../components/PageHeader.jsx'
 import { ContactDetails } from '../components/ContactDetails.jsx'
 import { ContactForm } from '../components/ContactForm.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { Sticker } from '../components/Sticker.jsx'
-import { packageOptions } from '../data/pricing.js'
 import { site } from '../data/site.js'
 import portrait from '../assets/portrait-800.webp'
 import portrait2x from '../assets/portrait-1400.webp'
@@ -18,14 +15,6 @@ export default function Contact() {
     description: `Ota yhteyttä OKKUVAan: ${site.email}, ${site.phone}. Kerro yrityksestäsi ja jutellaan, miten lyhytvideot toimisivat sinulle.`,
     path: '/ota-yhteytta',
   })
-
-  const [searchParams] = useSearchParams()
-  const [defaultPackage, setDefaultPackage] = useState('')
-
-  useEffect(() => {
-    const value = searchParams.get('paketti')
-    if (value && packageOptions.some((option) => option.value === value)) setDefaultPackage(value)
-  }, [searchParams])
 
   return (
     <>
@@ -67,7 +56,7 @@ export default function Contact() {
               Lähetä viesti
             </Reveal>
             <Reveal delay={120}>
-              <ContactForm defaultPackage={defaultPackage} />
+              <ContactForm />
             </Reveal>
           </div>
         </div>

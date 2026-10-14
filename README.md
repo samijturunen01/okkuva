@@ -40,12 +40,11 @@ no animation library – every animation is CSS or a small hook.
     │   ├── site.js             Company details, navigation
     │   ├── videos.js           Reference videos
     │   ├── caseStudies.js      Results / case studies
-    │   ├── pricing.js          Packages and prices
     │   ├── features.js         What every video includes
     │   └── process.js          Production steps
-    ├── pages/                  Home, Pricing, Results, Contact, NotFound
+    ├── pages/                  Home, Results, Contact, NotFound
     ├── sections/               Home page sections (Hero, Showreel, Process, …)
-    ├── components/             Reusable UI (Navbar, Button, VideoCard, PricingCard, …)
+    ├── components/             Reusable UI (Navbar, Button, VideoCard, …)
     │   ├── glasses/            Animated SVG logo mark (geometry traced from the logo)
     │   └── video/              VideoCard, VideoReel, VideoModal + player context
     ├── hooks/                  useSeo, usePointerTilt, useReveal-style helpers, …
@@ -275,7 +274,7 @@ recommended setup.
 ## Editing tips
 
 - Colours, radii, type scale and easing live in `src/styles/tokens.css`.
-- Prices: `src/data/pricing.js` (shown exactly as written).
 - Company details / phone / email / Y-tunnus: `src/data/site.js`.
+- The old pricing URL `/hinnasto` redirects to `LEGACY_PRICING_REDIRECT` in `src/data/site.js`.
 - The animated logo is `src/components/glasses/` – its geometry was traced from
   the original logo file; the navbar and footer use the original PNG.

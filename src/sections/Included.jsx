@@ -11,7 +11,6 @@ export function Included() {
           eyebrow="Mitä saat"
           title="Jokaisessa videossa mukana."
           highlight={['Jokaisessa']}
-          lead="Sama sisältö jokaisessa paketissa – paketin koko määrää vain videoiden määrän."
           align="center"
         />
         <FeatureGrid features={features} />

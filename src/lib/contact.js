@@ -3,7 +3,6 @@
  * and the request to the Google Apps Script Web App.
  */
 import { config } from '../config/site'
-import { packageOptions } from '../data/pricing'
 
 export const LIMITS = {
   name: { min: 2, max: 80 },
@@ -15,14 +14,12 @@ export const LIMITS = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 const PHONE_RE = /^[+\d][\d\s()-]{5,}$/
-const allowedPackages = new Set(packageOptions.map((o) => o.value))
 
 export const emptyForm = {
   name: '',
   company: '',
   email: '',
   phone: '',
-  package: '',
   message: '',
   /** Honeypot – must stay empty. Hidden from humans with CSS. */
   website: '',
@@ -51,8 +48,6 @@ export function validate(values) {
 
   if (phone && (!PHONE_RE.test(phone) || phone.length > LIMITS.phone.max))
     errors.phone = 'Tarkista puhelinnumeron muoto.'
-
-  if (values.package && !allowedPackages.has(values.package)) errors.package = 'Valitse paketti listasta.'
 
   if (message.length < LIMITS.message.min) errors.message = 'Kerro muutamalla sanalla, mistä on kyse.'
   else if (message.length > LIMITS.message.max)

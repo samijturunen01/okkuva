@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router'
 import App from './App.jsx'
 import './styles/index.css'
 
-const KNOWN_ROUTES = new Set(['/', '/hinnasto', '/tulokset', '/ota-yhteytta'])
+const KNOWN_ROUTES = new Set(['/', '/tulokset', '/ota-yhteytta'])
 const base = import.meta.env.BASE_URL
 
 const container = document.getElementById('root')

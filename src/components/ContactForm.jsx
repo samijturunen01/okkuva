@@ -3,12 +3,11 @@ import { Button } from './Button.jsx'
 import { CheckIcon } from './icons.jsx'
 import { useRecaptcha } from '../hooks/useRecaptcha.js'
 import { config, isContactFormConfigured } from '../config/site.js'
-import { packageOptions } from '../data/pricing.js'
 import { site } from '../data/site.js'
 import { ContactError, LIMITS, emptyForm, submitContact, validate } from '../lib/contact.js'
 import './ContactForm.css'
 
-const FIELD_ORDER = ['name', 'company', 'email', 'phone', 'package', 'message']
+const FIELD_ORDER = ['name', 'company', 'email', 'phone', 'message']
 
 function Field({ id, label, required, error, hint, children }) {
   const describedBy = [error ? `${id}-error` : null, hint ? `${id}-hint` : null].filter(Boolean).join(' ') || undefined
@@ -45,7 +44,7 @@ function Field({ id, label, required, error, hint, children }) {
  * Protection: reCAPTCHA v3 token, honeypot field, time-to-submit,
  * client + server validation and a double-submit guard.
  */
-export function ContactForm({ defaultPackage = '' }) {
+export function ContactForm() {
   const [values, setValues] = useState(emptyForm)
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
@@ -58,11 +57,6 @@ export function ContactForm({ defaultPackage = '' }) {
   useEffect(() => {
     startedAt.current = Date.now()
   }, [])
-
-  // Pre-select the package passed via ?paketti=…
-  useEffect(() => {
-    if (defaultPackage) setValues((v) => ({ ...v, package: defaultPackage }))
-  }, [defaultPackage])
 
   const update = (event) => {
     const { name, value } = event.target
@@ -120,7 +114,6 @@ export function ContactForm({ defaultPackage = '' }) {
         company: values.company.trim(),
         email: values.email.trim(),
         phone: values.phone.trim(),
-        package: values.package,
         message: values.message.trim(),
         website: values.website,
         token,
@@ -231,29 +224,6 @@ export function ContactForm({ defaultPackage = '' }) {
               aria-invalid={invalid || undefined}
               aria-describedby={describedBy}
             />
-          )}
-        </Field>
-
-        <Field id="contact-package" label="Kiinnostava paketti" error={touched.package && errors.package}>
-          {({ id, describedBy, invalid }) => (
-            <div className="select-wrap">
-              <select
-                id={id}
-                name="package"
-                value={values.package}
-                onChange={update}
-                onBlur={blur}
-                aria-invalid={invalid || undefined}
-                aria-describedby={describedBy}
-              >
-                <option value="">Valitse…</option>
-                {packageOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
           )}
         </Field>
 

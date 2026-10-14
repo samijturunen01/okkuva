@@ -7,14 +7,12 @@ import Home from './pages/Home.jsx'
  * preloaded when a link is hovered / focused, so navigation feels instant.
  */
 const loaders = {
-  '/hinnasto': () => import('./pages/Pricing.jsx'),
   '/tulokset': () => import('./pages/Results.jsx'),
   '/ota-yhteytta': () => import('./pages/Contact.jsx'),
 }
 
 export const pages = {
   Home,
-  Pricing: lazy(loaders['/hinnasto']),
   Results: lazy(loaders['/tulokset']),
   Contact: lazy(loaders['/ota-yhteytta']),
   NotFound: lazy(() => import('./pages/NotFound.jsx')),

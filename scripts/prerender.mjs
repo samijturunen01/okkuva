@@ -2,8 +2,9 @@
  * Prerender every route to static HTML after `vite build`.
  *
  * Produces:
- *   dist/index.html, dist/hinnasto.html + dist/hinnasto/index.html, …
- *   dist/404.html         – branded not-found page (GitHub Pages serves it for unknown URLs)
+ *   dist/index.html, dist/tulokset.html + dist/tulokset/index.html, …
+ *   dist/hinnasto.html + dist/hinnasto/index.html – redirect from the removed pricing page
+ *   dist/404.html        – branded not-found page (GitHub Pages serves it for unknown URLs)
  *   dist/sitemap.xml      – only when VITE_SITE_URL is set
  *   dist/robots.txt       – with a Sitemap: line when VITE_SITE_URL is set
  *   dist/.nojekyll        – so GitHub Pages serves files starting with "_"
@@ -26,7 +27,6 @@ const siteUrl = (process.env.VITE_SITE_URL || env.VITE_SITE_URL || '').replace(/
 
 const routes = [
   { path: '/', files: ['index.html'] },
-  { path: '/hinnasto', files: ['hinnasto.html', 'hinnasto/index.html'] },
   { path: '/tulokset', files: ['tulokset.html', 'tulokset/index.html'] },
   { path: '/ota-yhteytta', files: ['ota-yhteytta.html', 'ota-yhteytta/index.html'] },
   { path: '/404', files: ['404.html'], sitemap: false },
@@ -72,6 +72,33 @@ for (const route of routes) {
   }
   console.log(`prerendered ${route.path.padEnd(14)} → ${route.files.join(', ')}`)
 }
+
+// Old pricing URL → static redirect (GitHub Pages cannot send HTTP redirects).
+const { LEGACY_PRICING_PATH, LEGACY_PRICING_REDIRECT } = await import(
+  pathToFileURL(path.join(root, 'src/data/site.js')).href
+)
+const legacyTarget = `${base}${LEGACY_PRICING_REDIRECT.slice(1)}`
+const redirectPage = `<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OKKUVA</title>
+    <meta name="robots" content="noindex" />
+    ${siteUrl ? `<link rel="canonical" href="${siteUrl}${legacyTarget}" />\n    ` : ''}<meta http-equiv="refresh" content="0; url=${legacyTarget}" />
+    <script>location.replace(${JSON.stringify(legacyTarget)})</script>
+  </head>
+  <body>
+    <p><a href="${legacyTarget}">Jatka sivulle</a></p>
+  </body>
+</html>
+`
+const legacySlug = LEGACY_PRICING_PATH.slice(1)
+for (const file of [`${legacySlug}.html`, `${legacySlug}/index.html`]) {
+  const out = path.join(dist, file)
+  mkdirSync(path.dirname(out), { recursive: true })
+  writeFileSync(out, redirectPage)
+}
+console.log(`redirect    ${LEGACY_PRICING_PATH.padEnd(14)} → ${legacyTarget}`)
 
 // robots.txt + sitemap.xml ------------------------------------------------
 let robots = 'User-agent: *\nAllow: /\n'
