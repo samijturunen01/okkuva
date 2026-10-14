@@ -1,10 +1,11 @@
 import { Reveal } from './Reveal.jsx'
 import { SplitWords } from './SplitWords.jsx'
 import { Button } from './Button.jsx'
+import { ImpactBlock } from './ImpactBlock.jsx'
 import { VideoCard } from './video/VideoCard.jsx'
-import { ArrowIcon } from './icons.jsx'
 import { getVideos } from '../data/videos.js'
-import { RESULTS_PATH } from '../data/site.js'
+import { KIND_LABELS } from '../data/caseStudies.js'
+import { COLLAB_PATH } from '../data/site.js'
 import './CaseStudy.css'
 
 /**
@@ -25,7 +26,7 @@ export function CaseStudy({ study, index = 0, compact = false, headingLevel: Hea
     <article className={classes} id={compact ? undefined : study.slug} aria-labelledby={titleId}>
       <div className="case__header">
         <Reveal as="span" className="eyebrow">
-          {compact ? 'Asiakas' : `Case ${String(index + 1).padStart(2, '0')}`}
+          {KIND_LABELS[study.kind] || (compact ? 'Asiakas' : `Case ${String(index + 1).padStart(2, '0')}`)}
         </Reveal>
         <Reveal as={Heading} id={titleId} className="case__client" delay={60}>
           <SplitWords text={study.client} />
@@ -44,58 +45,14 @@ export function CaseStudy({ study, index = 0, compact = false, headingLevel: Hea
         </Reveal>
         {compact && (
           <Reveal delay={220}>
-            <Button to={`${RESULTS_PATH}#${study.slug}`} variant="ghost">
+            <Button to={`${COLLAB_PATH}#${study.slug}`} variant="ghost">
               Katso koko case
             </Button>
           </Reveal>
         )}
       </div>
 
-      {impact && (
-        <div className="case__impact">
-          {impact.eyebrow && (
-            <Reveal as="span" className="eyebrow case__impact-eyebrow">
-              {impact.eyebrow}
-            </Reveal>
-          )}
-          {impact.story && (
-            <Reveal as="p" className="case__impact-story" delay={60}>
-              {impact.story}
-            </Reveal>
-          )}
-
-          {impact.growth && (
-            <Reveal className="case__growth" delay={120} variant="scale">
-              <p className="case__growth-jump">
-                <span className="case__growth-from">{impact.growth.from}</span>
-                <ArrowIcon className="case__growth-arrow" />
-                <span className="visually-hidden">kasvoi</span>
-                <span className="case__growth-to text-gradient">{impact.growth.to}</span>
-              </p>
-              <span className="case__growth-bar" aria-hidden="true" />
-              <p className="case__growth-label">{impact.growth.label}</p>
-              {impact.growth.note && <p className="case__growth-note">{impact.growth.note}</p>}
-            </Reveal>
-          )}
-
-          {impact.stats && impact.stats.length > 0 && (
-            <div className="case__impact-stats">
-              {impact.stats.map((stat, i) => (
-                <Reveal
-                  key={stat.label}
-                  className={`case__stat ${stat.tone === 'dark' ? 'case__stat--dark' : ''}`.trim()}
-                  delay={180 + i * 90}
-                  variant="scale"
-                >
-                  <p className="case__stat-value text-gradient">{stat.value}</p>
-                  <p className="case__stat-label">{stat.label}</p>
-                  {stat.note && <p className="case__stat-note">{stat.note}</p>}
-                </Reveal>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+      {impact && <ImpactBlock impact={impact} />}
 
       <div className="case__videos">
         {videos.map((video, i) => (

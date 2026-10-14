@@ -1,7 +1,9 @@
 # OKKUVA – verkkosivusto
 
-Marketing website for **OKKUVA**, a Finnish short-form video production company.
-Built with React 19, Vite, plain modern CSS and React Router. No UI framework,
+Creator portfolio and collaboration site for **Daniel** (OKKUVA), a Finnish
+video creator and storyteller. The site is aimed first at organisations that
+want individual commercial video collaborations in Daniel's own concepts;
+custom video production is a secondary offering. Built with React 19, Vite, plain modern CSS and React Router. No UI framework,
 no animation library – every animation is CSS or a small hook.
 
 - Prerendered static HTML for every page (real titles, descriptions and Open Graph
@@ -37,13 +39,14 @@ no animation library – every animation is CSS or a small hook.
     ├── routes.jsx              Lazy page modules + preloading
     ├── config/site.js          Public runtime config from env variables
     ├── data/                   ✏️ Editable content
-    │   ├── site.js             Company details, navigation
-    │   ├── videos.js           Reference videos
-    │   ├── caseStudies.js      Results / case studies
-    │   ├── features.js         What every video includes
-    │   └── process.js          Production steps
-    ├── pages/                  Home, Results, Contact, NotFound
-    ├── sections/               Home page sections (Hero, Showreel, Process, …)
+    │   ├── site.js             Company details, social links, navigation, redirects
+    │   ├── videos.js           Videos (own concepts, collaborations, client work)
+    │   ├── concepts.js         The three video concepts
+    │   ├── collaboration.js    Collaborations page: forms, terms, process
+    │   ├── about.js            About page texts
+    │   └── caseStudies.js      References / results
+    ├── pages/                  Home, Videos, Collaborations, About, Contact, NotFound
+    ├── sections/               Page sections (Hero, MeetDaniel, Showreel, …)
     ├── components/             Reusable UI (Navbar, Button, VideoCard, …)
     │   ├── glasses/            Animated SVG logo mark (geometry traced from the logo)
     │   └── video/              VideoCard, VideoReel, VideoModal + player context
@@ -55,6 +58,23 @@ no animation library – every animation is CSS or a small hook.
 
 All visible text is Finnish and lives either in `src/data/*.js` or directly in the
 section/page components, so copy changes are a one-file edit.
+
+### Pages
+
+| URL              | Page                 | Notes                                                    |
+| ---------------- | -------------------- | -------------------------------------------------------- |
+| `/`              | Etusivu              | Daniel, featured videos, concepts, collaborations, results |
+| `/videot`        | Videot & konseptit   | One section per concept (`#ihmisten-tarinat`, `#jatkoon-vai-ei`, `#blessattu-vai-kokattu`) + client work (`#tilaustyot`) |
+| `/yhteistyot`    | Yhteistyöt           | Commercial collaborations, custom production (`#videotuotanto`), references (`#referenssit`), process |
+| `/danielista`    | Danielista           | About Daniel                                             |
+| `/ota-yhteytta`  | Ota yhteyttä         | Contact form; `?aihe=yhteistyo\|videotuotanto\|tarina\|muu` preselects the inquiry type |
+| `/hinnasto`      | → `/yhteistyot`      | Removed pricing page (static redirect)                   |
+| `/tulokset`      | → `/yhteistyot#referenssit` | Removed results page (static redirect)            |
+
+GitHub Pages cannot send HTTP 301 responses, so removed pages get a static
+redirect page (instant meta refresh + canonical link to the target, which search
+engines treat as a permanent redirect). Add more in `LEGACY_REDIRECTS` in
+`src/data/site.js`.
 
 ## 2. Run locally
 
@@ -79,7 +99,7 @@ npm run preview    # serve dist/ locally on http://localhost:4273
 
 `npm run build:spa` builds without prerendering (plain SPA) if you ever need it.
 
-## 3. Replace or add reference videos
+## 3. Replace or add videos
 
 Videos live in `public/videos/` as three files per video:
 
@@ -97,13 +117,19 @@ node scripts/optimize-media.mjs "path/to/Video.mov" kesakampanja-2026 1.5
 #                                 source file          slug            poster time (s)
 ```
 
-Then add an entry to `src/data/videos.js`:
+Then add an entry to `src/data/videos.js` (or fill in a pending one, e.g.
+`pulla-puoti`):
 
 ```js
 {
   id: 'kesakampanja-2026',
   title: 'Kesäkampanja',
-  kicker: 'Haastattelu',
+  kind: 'own',                     // 'own' | 'collab' (shown as "Kaupallinen yhteistyö") | 'production'
+  concept: 'ihmisten-tarinat',     // id from concepts.js (own / collab videos)
+  client: null,                    // organisation, for 'collab' and 'production'
+  href: 'https://www.instagram.com/reel/…', // optional link to the published video
+  platform: 'Instagram',
+  featured: 1,                     // optional: order on the home page
   description: 'Lyhyt kuvaus videosta.',
   duration: '0:52',
   src: 'videos/kesakampanja-2026.mp4',
@@ -118,7 +144,16 @@ Then add an entry to `src/data/videos.js`:
 },
 ```
 
-The home page reel shows every video in that list. To remove a video, delete
+Every card shows what the video is – Danielin oma video (concept name),
+*Kaupallinen yhteistyö* or *Tilaustyö* – so own content, paid collaborations
+and client work are never mixed up. Paid collaborations must use
+`kind: 'collab'` so they are labelled as advertising.
+
+An entry without `poster` is shown as a branded "Video lisätään pian"
+placeholder on `/videot`; with only `href` (no `src`) the card opens the
+published video. The home page reel shows the videos with a `featured` number
+**and** a poster, in that order – so the Pulla Puoti and Herkkupaja stories
+appear first there as soon as their files are added. To remove a video, delete
 its entry (and the files).
 
 ### Instagram Reels -kerros
@@ -145,8 +180,9 @@ Edit `src/data/caseStudies.js` and add an object:
 
 ```js
 {
-  slug: 'asiakas-oy',              // anchor on /tulokset#asiakas-oy
+  slug: 'asiakas-oy',              // anchor on /yhteistyot#asiakas-oy
   client: 'Asiakas Oy',
+  kind: 'production',               // 'production' | 'collab' – shown as the label
   summary: 'Mitä tehtiin ja miksi.',
   tags: ['Lyhytvideot', 'Haastattelut'],
   videos: ['kesakampanja-2026'],   // ids from videos.js
@@ -159,9 +195,8 @@ Edit `src/data/caseStudies.js` and add an object:
 ```
 
 Metrics and quotes are rendered only when provided – nothing is invented.
-The Business Joensuu entry currently has all four reference videos attached and
-an empty `metrics` array; confirm the video mapping and fill in real numbers
-when you have them (see the `TODO` comments in the file).
+The VisitKarelia entry has all four VisitKarelia videos attached; confirm the
+video mapping and the figures (see the `TODO` comments in the file).
 
 ## 5. Google Apps Script (contact form backend)
 
@@ -175,6 +210,12 @@ Full guide: [`apps-script/README.md`](apps-script/README.md). Short version:
 
 The script validates every field again, verifies the reCAPTCHA token, applies
 rate limits, escapes all content in the email and returns JSON.
+
+The form's required inquiry type (Kaupallinen yhteistyö / Videotuotanto /
+Ehdota tarinaa / Muu asia, `INQUIRY_TYPES` in `src/lib/contact.js`) is sent as
+the first line of the message (`Aihe: …`), so it reaches the inbox with the
+script exactly as it is deployed – no redeploy needed. It is also sent as a
+separate `inquiry` field, which the current script ignores.
 
 ## 6. reCAPTCHA v3
 
@@ -275,6 +316,12 @@ recommended setup.
 
 - Colours, radii, type scale and easing live in `src/styles/tokens.css`.
 - Company details / phone / email / Y-tunnus: `src/data/site.js`.
-- The old pricing URL `/hinnasto` redirects to `LEGACY_PRICING_REDIRECT` in `src/data/site.js`.
+- Concepts: `src/data/concepts.js` (set `status: 'active'` when Blessattu vai
+  kokattu launches; `cover` adds an image to the home page card).
+- Collaborations page content: `src/data/collaboration.js`; about page:
+  `src/data/about.js`; social accounts: `socials` in `src/data/site.js`.
+- Removed URLs and their targets: `LEGACY_REDIRECTS` in `src/data/site.js`.
+- Small orange text on light backgrounds uses `--orange-ink` (the lens orange
+  itself is too light for body-size text).
 - The animated logo is `src/components/glasses/` – its geometry was traced from
   the original logo file; the navbar and footer use the original PNG.

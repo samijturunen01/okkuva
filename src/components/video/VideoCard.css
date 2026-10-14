@@ -100,7 +100,7 @@
 }
 
 .video-card__meta .video-card__kicker {
-  color: var(--orange-2);
+  color: var(--orange-ink);
 }
 
 .video-card__heading {
@@ -123,4 +123,134 @@
   .video-card__button:focus-visible .video-card__play {
     transform: translate(-50%, -50%);
   }
+}
+
+/* Non-interactive frame (placeholder without a link). */
+.video-card__frame {
+  display: block;
+}
+
+a.video-card__button {
+  color: inherit;
+}
+
+/* Label: own concept / commercial collaboration / client work. */
+.video-card__badge {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.3em 0.7em;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+}
+
+.video-card__badge--own::before {
+  content: '';
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--grad-lens);
+}
+
+/* Advertising must be recognisable – the collab label is the loudest one. */
+.video-card__badge--collab {
+  color: var(--ink);
+  background: var(--grad-accent);
+  box-shadow: none;
+}
+
+.video-card__ext {
+  justify-self: start;
+  margin-top: 0.25rem;
+  font-size: var(--fs-small);
+}
+
+.sheet .video-card__heading {
+  color: var(--on-dark);
+}
+
+.sheet .video-card__desc {
+  color: var(--on-dark-2);
+}
+
+.sheet .video-card__badge {
+  color: var(--on-dark-2);
+  box-shadow: inset 0 0 0 1.5px var(--line-on-dark);
+}
+
+.sheet .video-card__badge--collab {
+  color: var(--ink);
+  box-shadow: none;
+}
+
+/* Placeholder screen for videos whose files are not on the site yet. */
+.video-card__placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16% 9% 9%;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255, 165, 58, 0.22), transparent 70%),
+    var(--bg-soft);
+  color: var(--ink);
+  isolation: isolate;
+}
+
+.video-card__placeholder-glow {
+  position: absolute;
+  z-index: -1;
+  left: -30%;
+  bottom: -25%;
+  width: 120%;
+  aspect-ratio: 1;
+  background: var(--grad-glow);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.video-card__placeholder-mark {
+  display: block;
+  width: 62%;
+  margin-inline: auto;
+  opacity: 0.9;
+}
+
+.video-card__placeholder-text {
+  display: grid;
+  gap: 0.4em;
+}
+
+.video-card__placeholder-kicker {
+  font-size: clamp(0.55rem, 4.2cqw, 0.78rem);
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+
+.video-card__placeholder-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1rem, 10cqw, 1.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.video-card__placeholder .video-card__placeholder-status {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 0.35em 0.7em;
+  font-size: clamp(0.5rem, 5.2cqw, 0.75rem);
+  white-space: nowrap;
+}
+
+.video-card--pending .video-card__button:hover {
+  transform: translateY(-4px);
 }

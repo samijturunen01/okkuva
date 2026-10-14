@@ -1,7 +1,7 @@
 {
   "name": "OKKUVA",
   "short_name": "OKKUVA",
-  "description": "Lyhytvideoita yrityksille – videoita, jotka pysäyttävät scrollaamisen.",
+  "description": "Daniel – tarinankertoja ja videontekijä. Tarinoita, jotka tuntuvat. Videoita, jotka muistetaan.",
   "start_url": "./",
   "display": "browser",
   "background_color": "#FFFCF8",

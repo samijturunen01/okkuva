@@ -35,6 +35,8 @@
   --red: #f74d2c;
   --red-deep: #e8352a;
   --peach: #fbb068;
+  /* Deeper shade of the lens orange for small text on light surfaces (≥ 4.7:1). */
+  --orange-ink: #c2410c;
 
   --grad-lens: linear-gradient(180deg, #f58a2f 0%, #f86b2c 55%, #f74d2c 100%);
   --grad-accent: linear-gradient(135deg, #ffa53a 0%, #f86b2c 55%, #f0432a 100%);

@@ -27,6 +27,11 @@ export function render(url) {
         </SeoContext.Provider>
       </StrictMode>,
       {
+        // Static prerender: always write the page inline. By default React
+        // outlines large Suspense boundaries – the HTML then holds only the
+        // blank fallback, and the real page sits in a hidden <div> that a
+        // script reveals after a delay (no content without JavaScript).
+        progressiveChunkSize: Number.POSITIVE_INFINITY,
         onAllReady() {
           const chunks = []
           const sink = new Writable({

@@ -118,7 +118,65 @@
   line-height: var(--lh-body);
 }
 
+/* Quick contact links (variant without the portrait). */
+.contact-cta__links {
+  display: grid;
+  gap: 0.75rem;
+  width: min(100%, 420px);
+  justify-self: center;
+}
+
+.contact-cta__link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-m);
+  background: var(--dark-2);
+  border: 1px solid var(--line-on-dark);
+  font-weight: 650;
+  font-size: 1.05rem;
+  color: var(--on-dark);
+  transition:
+    transform 0.45s var(--ease-out),
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.contact-cta__link:hover,
+.contact-cta__link:focus-visible {
+  transform: translateX(4px);
+  border-color: rgba(248, 107, 44, 0.55);
+  background: var(--dark-3);
+}
+
+.contact-cta__link svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--peach);
+}
+
+.contact-cta__link-body {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact-cta__link-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+}
+
 @media (min-width: 900px) {
+  .contact-cta__links {
+    justify-self: end;
+  }
+
   .contact-cta__inner {
     grid-template-columns: 1.3fr 1fr;
   }

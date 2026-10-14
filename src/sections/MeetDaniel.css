@@ -1,0 +1,119 @@
+.meet__inner {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.meet__visual {
+  position: relative;
+  width: min(100%, 440px);
+  justify-self: center;
+}
+
+.meet__photo {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transform: rotate(-2.5deg);
+  box-shadow: var(--shadow-l);
+  transition: transform 0.6s var(--ease-spring);
+}
+
+.meet__visual:hover .meet__photo {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.meet__photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.meet__sticker {
+  position: absolute;
+  right: -5%;
+  top: 7%;
+  font-size: 1.05rem;
+}
+
+.meet__text {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.meet__title {
+  max-width: 14ch;
+}
+
+.meet__body {
+  max-width: 58ch;
+  color: var(--ink-2);
+}
+
+.meet__pillars {
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.meet__pillar {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-m);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--orange-2);
+}
+
+.meet__pillar-title {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.meet__pillar-text {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.meet__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 0.5rem;
+}
+
+.meet__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  transition: color var(--dur-fast) ease;
+}
+
+.meet__social:hover,
+.meet__social:focus-visible {
+  color: var(--ink);
+}
+
+.meet__social svg {
+  width: 20px;
+  height: 20px;
+  color: var(--orange-2);
+}
+
+@media (min-width: 700px) {
+  .meet__pillars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .meet__inner {
+    grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.15fr);
+  }
+}

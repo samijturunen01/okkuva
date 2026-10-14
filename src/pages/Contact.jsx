@@ -4,7 +4,7 @@ import { ContactDetails } from '../components/ContactDetails.jsx'
 import { ContactForm } from '../components/ContactForm.jsx'
 import { Reveal } from '../components/Reveal.jsx'
 import { Sticker } from '../components/Sticker.jsx'
-import { site } from '../data/site.js'
+import { CONTACT_PATH, site } from '../data/site.js'
 import portrait from '../assets/portrait-800.webp'
 import portrait2x from '../assets/portrait-1400.webp'
 import './Contact.css'
@@ -12,17 +12,17 @@ import './Contact.css'
 export default function Contact() {
   useSeo({
     title: 'Ota yhteyttä',
-    description: `Ota yhteyttä OKKUVAan: ${site.email}, ${site.phone}. Kerro yrityksestäsi ja jutellaan, miten lyhytvideot toimisivat sinulle.`,
-    path: '/ota-yhteytta',
+    description: `Ota yhteyttä Danieliin: kaupalliset yhteistyöt, videotuotannot ja tarinavinkit. ${site.email}, ${site.phone}.`,
+    path: CONTACT_PATH,
   })
 
   return (
     <>
       <PageHeader
         eyebrow="Ota yhteyttä"
-        title="Jutellaan videoista."
-        highlight={['videoista']}
-        lead="Kerro lyhyesti yrityksestäsi ja siitä, mitä haluaisit videoilla saavuttaa. Loput hoituu puhelimessa."
+        title="Jutellaan yhteistyöstä."
+        highlight={['yhteistyöstä']}
+        lead="Kaupallinen yhteistyö, videotuotanto vai vinkki tarinasta, joka pitäisi kertoa? Kerro lyhyesti, mitä mielessä on – vastaan itse."
       />
 
       <section className="section section--flush-top contact-page" aria-label="Yhteystiedot ja yhteydenottolomake">
@@ -35,7 +35,7 @@ export default function Contact() {
                   src={portrait}
                   srcSet={`${portrait} 800w, ${portrait2x} 1400w`}
                   sizes="(min-width: 900px) 360px, 80vw"
-                  alt="OKKUVAn videontekijä oransseissa aurinkolaseissa"
+                  alt="Daniel oransseissa aurinkolaseissa"
                   width="800"
                   height="1000"
                   loading="lazy"
@@ -43,7 +43,7 @@ export default function Contact() {
                 />
               </div>
               <Sticker className="contact-page__sticker" tone="dark" rotate={6}>
-                Vastaamme itse 📞
+                Vastaan itse 📞
               </Sticker>
             </Reveal>
             <Reveal as="p" className="contact-page__intro" delay={320}>

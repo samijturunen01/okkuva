@@ -1,6 +1,6 @@
 import { AppLink } from './AppLink.jsx'
-import { InstagramIcon, MailIcon, PhoneIcon } from './icons.jsx'
-import { nav, site } from '../data/site.js'
+import { ArrowIcon, InstagramIcon, MailIcon, PhoneIcon } from './icons.jsx'
+import { nav, site, socials } from '../data/site.js'
 import logo from '../assets/okkuva-logo.png'
 import logo2x from '../assets/okkuva-logo@2x.png'
 import './Footer.css'
@@ -17,6 +17,7 @@ export function Footer() {
             <img src={logo} srcSet={`${logo} 1x, ${logo2x} 2x`} alt="OKKUVA" width="640" height="403" />
           </AppLink>
           <p className="footer__tagline">{site.tagline}</p>
+          <p className="footer__byline">{site.person} – tarinankertoja ja videontekijä</p>
         </div>
 
         <nav className="footer__nav" aria-label="Alatunnisteen valikko">
@@ -42,10 +43,19 @@ export function Footer() {
             <PhoneIcon />
             <span>{site.phone}</span>
           </a>
-          <a href={site.instagramHref} className="footer__link" target="_blank" rel="noopener noreferrer">
-            <InstagramIcon />
-            <span>@{site.instagram}</span>
-          </a>
+          {socials.map((social) => (
+            <a
+              key={social.id}
+              href={social.href}
+              className="footer__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${social.label}: ${social.handle}`}
+            >
+              {social.id === 'instagram' ? <InstagramIcon /> : <ArrowIcon />}
+              <span>{social.handle}</span>
+            </a>
+          ))}
           <p className="footer__meta">Y-tunnus {site.businessId}</p>
         </address>
       </div>

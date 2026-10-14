@@ -4,18 +4,72 @@
  */
 import { config } from '../config/site'
 
+/**
+ * What the message is about. The first option is the primary one.
+ *   hint – shown under the message field once the type is chosen
+ * Links can preselect a type with ?aihe=<id> (see contactPath in data/site.js).
+ */
+export const INQUIRY_TYPES = [
+  {
+    id: 'yhteistyo',
+    label: 'Kaupallinen yhteistyö',
+    description: 'Sponsoroitu video tai sisältöyhteistyö Danielin konsepteissa',
+    hint: 'Kerro organisaatiostanne, tavoitteestanne ja mahdollisesta aikataulusta.',
+  },
+  {
+    id: 'videotuotanto',
+    label: 'Videotuotanto',
+    description: 'Räätälöity video organisaatiolle tai yritykselle',
+    hint: 'Kerro ideasta, tavoitteesta ja siitä, millaista kokonaisuutta suunnittelet.',
+  },
+  {
+    id: 'tarina',
+    label: 'Ehdota tarinaa',
+    description: 'Vinkkaa ihmisestä, paikasta tai kokemuksesta',
+    hint: 'Kenen tarina pitäisi kertoa – ja miksi?',
+  },
+  {
+    id: 'muu',
+    label: 'Muu asia',
+    description: 'Kaikki muu, mitä haluat kysyä',
+    hint: 'Kerro lyhyesti, mistä on kyse.',
+  },
+]
+
+export const inquiryById = Object.fromEntries(INQUIRY_TYPES.map((t) => [t.id, t]))
+
+/**
+ * The inquiry type is sent as the first line of the message, so it reaches the
+ * inbox with the backend as it is deployed today (the Apps Script only emails
+ * the fields it knows). It is also sent separately as `inquiry`.
+ */
+const inquiryPrefix = (type) => `Aihe: ${type.label}\n\n`
+const PREFIX_RESERVE = Math.max(...INQUIRY_TYPES.map((t) => inquiryPrefix(t).length))
+
+/** Server-side message limit (apps-script/Code.gs). */
+const SERVER_MESSAGE_MAX = 2000
+
 export const LIMITS = {
   name: { min: 2, max: 80 },
   company: { max: 100 },
   email: { max: 120 },
   phone: { max: 30 },
-  message: { min: 10, max: 2000 },
+  // Leaves room for the "Aihe: …" line within the server's limit.
+  message: { min: 10, max: SERVER_MESSAGE_MAX - PREFIX_RESERVE },
+}
+
+/** Message text as sent to the backend: inquiry type first, then the visitor's text. */
+export function composeMessage(values) {
+  const type = inquiryById[values.inquiry]
+  const message = values.message.trim()
+  return type ? `${inquiryPrefix(type)}${message}` : message
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 const PHONE_RE = /^[+\d][\d\s()-]{5,}$/
 
 export const emptyForm = {
+  inquiry: '',
   name: '',
   company: '',
   email: '',
@@ -36,13 +90,15 @@ export function validate(values) {
   const phone = values.phone.trim()
   const message = values.message.trim()
 
+  if (!inquiryById[values.inquiry]) errors.inquiry = 'Valitse, mitä yhteydenottosi koskee.'
+
   if (name.length < LIMITS.name.min) errors.name = 'Kerro vielä nimesi.'
   else if (name.length > LIMITS.name.max) errors.name = `Nimi voi olla enintään ${LIMITS.name.max} merkkiä.`
 
   if (values.company.trim().length > LIMITS.company.max)
-    errors.company = `Yrityksen nimi voi olla enintään ${LIMITS.company.max} merkkiä.`
+    errors.company = `Yrityksen tai organisaation nimi voi olla enintään ${LIMITS.company.max} merkkiä.`
 
-  if (!email) errors.email = 'Sähköposti tarvitaan, jotta voimme vastata.'
+  if (!email) errors.email = 'Sähköposti tarvitaan, jotta voin vastata.'
   else if (!EMAIL_RE.test(email) || email.length > LIMITS.email.max)
     errors.email = 'Tarkista sähköpostiosoitteen muoto.'
 

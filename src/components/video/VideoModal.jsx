@@ -4,6 +4,7 @@ import { ReelsOverlay } from './ReelsOverlay.jsx'
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll.js'
 import { publicUrl } from '../../config/site.js'
 import { CloseIcon } from '../icons.jsx'
+import { videoLabel } from '../../data/concepts.js'
 import './Phone.css'
 import './VideoModal.css'
 
@@ -85,7 +86,7 @@ export function VideoModal() {
           </div>
         </div>
         <div className="video-modal__caption">
-          {current && current.kicker && <span className="eyebrow eyebrow--on-dark">{current.kicker}</span>}
+          {current && <span className="eyebrow eyebrow--on-dark">{videoLabel(current)}</span>}
           <h2 id="video-modal-title" className="video-modal__title">
             {current ? current.title : 'Video'}
           </h2>

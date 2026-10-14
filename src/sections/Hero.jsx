@@ -1,14 +1,16 @@
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
 import { Glasses } from '../components/glasses/Glasses.jsx'
 import { SplitWords } from '../components/SplitWords.jsx'
 import { Button } from '../components/Button.jsx'
 import { Sticker } from '../components/Sticker.jsx'
 import { ArrowDownIcon } from '../components/icons.jsx'
 import { usePointerTilt } from '../hooks/usePointerTilt.js'
-import { CONTACT_PATH, RESULTS_PATH } from '../data/site.js'
+import { COLLAB_PATH, VIDEOS_PATH } from '../data/site.js'
 import './Hero.css'
 
-const HEADLINE = 'Videoita, jotka pysäyttävät scrollaamisen.'
+/** Two sentences, each on its own line(s). */
+const HEADLINE = ['Tarinoita, jotka tuntuvat.', 'Videoita, jotka muistetaan.']
+const HIGHLIGHT = ['tuntuvat', 'muistetaan']
 
 /**
  * Home page hero. The glasses assemble with CSS keyframes (so the animation
@@ -32,38 +34,52 @@ export function Hero() {
             </div>
           </div>
           <Sticker className="hero__sticker hero__sticker--rec" tone="dark" rotate={-7} dot>
-            REC 00:59
+            REC · Ihmisten tarinat
           </Sticker>
           <Sticker className="hero__sticker hero__sticker--format" rotate={6}>
-            9:16 · 4K
+            Jatkoon vai ei? 🤔
           </Sticker>
           <Sticker className="hero__sticker hero__sticker--caption" rotate={-3}>
             Tätä ei skrollata ohi 👀
           </Sticker>
         </div>
 
-        <p className="hero__eyebrow eyebrow">Lyhytvideoita yrityksille</p>
+        <p className="hero__eyebrow eyebrow">
+          Daniel · tarinankertoja<span className="hero__eyebrow-more"> ja videontekijä</span>
+        </p>
 
         <h1 className="hero__title" id="hero-title">
-          <SplitWords text={HEADLINE} highlight={['pysäyttävät']} wordClassName="hero__word" />
+          {HEADLINE.map((line, i) => (
+            <Fragment key={line}>
+              {i > 0 && ' '}
+              <span className="hero__line">
+                <SplitWords
+                  text={line}
+                  highlight={HIGHLIGHT}
+                  wordClassName="hero__word"
+                  startIndex={HEADLINE.slice(0, i).join(' ').split(' ').filter(Boolean).length}
+                />
+              </span>
+            </Fragment>
+          ))}
         </h1>
 
         <p className="hero__lead">
-          Teemme yrityksellesi lyhytvideoita, jotka toimivat somessa. Me hoidamme käsikirjoituksen, kuvauksen ja
-          editoinnin – sinun tarvitsee vain olla paikalla.
+          Moro! Olen Daniel. Tapaan kiinnostavia ihmisiä, tutustun heidän tarinoihinsa ja kokeilen asioita, jotka
+          herättävät uteliaisuutta. Teen videoita, jotka saavat ihmiset tuntemaan, nauramaan ja inspiroitumaan.
         </p>
 
         <div className="hero__actions">
-          <Button to={CONTACT_PATH} size="lg">
-            Ota yhteyttä
+          <Button to={COLLAB_PATH} size="lg">
+            Tehdään yhteistyötä
           </Button>
-          <Button to={RESULTS_PATH} variant="ghost" size="lg">
-            Katso tulokset
+          <Button to={VIDEOS_PATH} variant="ghost" size="lg">
+            Katso videot
           </Button>
         </div>
       </div>
 
-      <a href="#nayteikkuna" className="hero__scroll" aria-label="Selaa alaspäin">
+      <a href="#daniel" className="hero__scroll" aria-label="Selaa alaspäin">
         <ArrowDownIcon />
       </a>
     </section>

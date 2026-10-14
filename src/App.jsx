@@ -7,7 +7,7 @@ import { ScrollManager } from './components/ScrollManager.jsx'
 import { VideoPlayerProvider } from './components/video/VideoPlayerContext.jsx'
 import { VideoModal } from './components/video/VideoModal.jsx'
 import { pages, preloadAllRoutes } from './routes.jsx'
-import { LEGACY_PRICING_PATH, LEGACY_PRICING_REDIRECT } from './data/site.js'
+import { ABOUT_PATH, COLLAB_PATH, CONTACT_PATH, LEGACY_REDIRECTS, VIDEOS_PATH } from './data/site.js'
 
 function PageFallback() {
   return <div className="page-fallback" aria-hidden="true" />
@@ -33,9 +33,13 @@ export default function App() {
         <Suspense fallback={<PageFallback />}>
           <Routes>
             <Route path="/" element={<pages.Home />} />
-            <Route path={LEGACY_PRICING_PATH} element={<Navigate to={LEGACY_PRICING_REDIRECT} replace />} />
-            <Route path="/tulokset" element={<pages.Results />} />
-            <Route path="/ota-yhteytta" element={<pages.Contact />} />
+            <Route path={VIDEOS_PATH} element={<pages.Videos />} />
+            <Route path={COLLAB_PATH} element={<pages.Collaborations />} />
+            <Route path={ABOUT_PATH} element={<pages.About />} />
+            <Route path={CONTACT_PATH} element={<pages.Contact />} />
+            {LEGACY_REDIRECTS.map(({ from, to }) => (
+              <Route key={from} path={from} element={<Navigate to={to} replace />} />
+            ))}
             <Route path="*" element={<pages.NotFound />} />
           </Routes>
         </Suspense>

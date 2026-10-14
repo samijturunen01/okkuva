@@ -57,6 +57,21 @@
   font-size: var(--fs-h3);
 }
 
+@media (max-width: 899px) {
+  .contact-page__aside {
+    display: contents;
+  }
+
+  .contact-page__form {
+    order: 1;
+  }
+
+  .contact-page__visual,
+  .contact-page__intro {
+    order: 2;
+  }
+}
+
 @media (min-width: 900px) {
   .contact-page__grid {
     grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.4fr);

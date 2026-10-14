@@ -1,10 +1,14 @@
 /**
- * Case studies for the "Tulokset" page (and the preview on the home page).
+ * References / case studies. Shown on /yhteistyot#referenssit (and the
+ * results highlight on the home page).
  *
- * To add a client, copy an object below. Fields:
+ * To add a reference, copy an object below. Fields:
  *
- *   slug     – URL-safe id, used as the anchor (#slug) on /tulokset
+ *   slug     – URL-safe id, used as the anchor (#slug) on /yhteistyot
  *   client   – client name (shown as the heading)
+ *   kind     – what the work was, shown as the label above the client name:
+ *              'production' (tilaustyö / videotuotanto) or 'collab'
+ *              (kaupallinen yhteistyö Danielin omassa sisällössä)
  *   summary  – 1–3 sentences describing the project
  *   tags     – short descriptive labels
  *   videos   – ids from src/data/videos.js, shown as phone cards
@@ -15,23 +19,32 @@
  *   metrics  – REAL numbers only. Leave the array empty and the block is hidden.
  *              Example: { value: '120 000', label: 'näyttökertaa', note: 'ensimmäisen 30 päivän aikana' }
  *   quote    – optional real client quote: { text, author, role }. null hides it.
- *   featured – true = shown in the results preview on the home page
+ *   featured – true = shown in the results highlight on the home page
  *
- * Never invent metrics or quotes – the UI simply hides what is not provided.
+ * Never invent metrics, quotes or clients – the UI simply hides what is not
+ * provided.
  */
+export const KIND_LABELS = {
+  production: 'Videotuotanto',
+  collab: 'Kaupallinen yhteistyö',
+}
+
 export const caseStudies = [
   {
-    slug: 'business-joensuu',
-    client: 'Business Joensuu',
+    slug: 'visitkarelia',
+    client: 'VisitKarelia',
+    kind: 'production',
     summary:
-      'Sarja lyhytvideoita Pohjois-Karjalan paikoista, ihmisistä ja tapahtumista: alkuperäinen 70-luvun kioski, Kolin Taiteilijakoti Paateri, Liekinheitin kirkossa ja karjalaista kansanmusiikkia.',
-    tags: ['Lyhytvideot', 'Haastattelut', 'Paikalliset kohteet'],
-    // TODO (asiakas): vahvista, että kaikki neljä videota kuuluvat tähän projektiin.
+      'Sarja lyhytvideoita Pohjois-Karjalan paikoista, ihmisistä ja tapahtumista: alkuperäinen 70-luvun kioski, Kolin Taiteilijakoti Paateri, Liekinheitin kirkossa ja karjalaista kansanmusiikkia. Videot julkaistiin VisitKarelian omissa kanavissa.',
+    tags: ['Tilaustyö', 'Lyhytvideot', 'Haastattelut', 'Matkailu'],
+    // TODO (Daniel): vahvista, että kaikki neljä videota kuuluvat tähän projektiin.
     videos: ['kioski-70-luku', 'paateri-koli', 'liekinheitin-kirkossa', 'karjalainen-kansanmusiikki'],
+    // TODO (Daniel): tarkista luvut Meta-tilastoista ennen julkaisua ja lisää
+    // halutessasi ajankohta (esim. "kesä 2026") growth.note-kenttään.
     impact: {
-      eyebrow: 'VisitKarelia',
+      eyebrow: 'Tulokset',
       story:
-        'Business Joensuun alla toimivalle organisaatiolle VisitKarelialle Daniel toteutti noin 20 lyhytvideon markkinointipaketin, joka saavutti Metassa (Instagram + Facebook) yhteensä yli 1 miljoona näyttökertaa alle kahdessa kuukaudessa. Samalta ajanjaksolta edellisenä vuonna näyttökertoja kertyi noin 10 000, joten näkyvyys kasvoi noin 10 000 näyttökerrasta yli miljoonaan. Mikä parasta, lyhytvideoihin käytettiin maksullista mainontaa tasan 0 €.',
+        'Business Joensuun alla toimivalle VisitKarelialle Daniel toteutti noin 20 lyhytvideon markkinointikokonaisuuden, joka saavutti Metassa (Instagram + Facebook) yhteensä yli 1 miljoona näyttökertaa alle kahdessa kuukaudessa. Samalta ajanjaksolta edellisenä vuonna näyttökertoja kertyi noin 10 000. Lyhytvideoihin käytettiin maksullista mainontaa tasan 0 €.',
       growth: {
         from: '10 000',
         to: '1 000 000+',
@@ -42,18 +55,16 @@ export const caseStudies = [
         {
           value: '0 €',
           label: 'maksettua mainontaa',
-          note: 'Koko kasvu tuli ilman mainosbudjettia.',
+          note: 'Näkyvyys syntyi ilman mainosbudjettia.',
           tone: 'dark',
         },
         {
           value: 'n. 20',
           label: 'lyhytvideota',
-          note: 'Yhtenä markkinointipakettina, alle kahdessa kuukaudessa.',
+          note: 'Yhtenä kokonaisuutena, alle kahdessa kuukaudessa.',
         },
       ],
     },
-    // TODO (asiakas): lisää todelliset luvut, esim.
-    // { value: '120 000', label: 'näyttökertaa', note: '30 päivässä' },
     metrics: [],
     quote: null,
     featured: true,

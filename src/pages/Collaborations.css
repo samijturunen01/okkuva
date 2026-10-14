@@ -1,0 +1,198 @@
+.collab-page__header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.collab-page__audiences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.collab-page__audiences .chip {
+  font-size: var(--fs-small);
+  padding: 0.45em 0.95em;
+}
+
+/* Comparison --------------------------------------------------------- */
+.collab-page__compare {
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+}
+
+.collab-page__compare-title {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+  max-width: 22ch;
+}
+
+.collab-page__compare-grid {
+  display: grid;
+  gap: clamp(0.85rem, 1.6vw, 1.25rem);
+}
+
+.collab-page__compare-col {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  border-radius: var(--radius-l);
+  background: var(--bg-tint);
+  border: 1px solid var(--line);
+}
+
+.collab-page__compare-col--collab {
+  background: var(--dark);
+  color: var(--on-dark);
+  border-color: rgba(248, 107, 44, 0.45);
+  box-shadow: var(--shadow-l);
+}
+
+.collab-page__compare-heading {
+  font-size: var(--fs-h4);
+}
+
+.collab-page__compare-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.collab-page__compare-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--ink-2);
+}
+
+.collab-page__compare-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.7rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink-3);
+}
+
+.collab-page__compare-col--collab .collab-page__compare-list li {
+  color: var(--on-dark-2);
+}
+
+.collab-page__compare-col--collab .collab-page__compare-list li::before {
+  top: 0.35em;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--grad-lens);
+}
+
+/* Terms agreed separately ------------------------------------------- */
+.collab-page__terms {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.4rem, 3.5vw, 2.5rem);
+  border-radius: var(--radius-l);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-s);
+}
+
+.collab-page__terms-text {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.collab-page__terms-title {
+  font-size: var(--fs-h4);
+}
+
+.collab-page__terms-text p {
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+
+.collab-page__terms-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  gap: 0.6rem 1rem;
+  align-content: start;
+}
+
+.collab-page__terms-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+.collab-page__terms-check {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--grad-accent);
+  color: var(--ink);
+}
+
+.collab-page__terms-check svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Secondary offering ------------------------------------------------ */
+.collab-page__production {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: var(--radius-xl);
+  background: var(--bg-soft);
+}
+
+.collab-page__production-text {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: start;
+}
+
+.collab-page__production-title {
+  font-size: var(--fs-h3);
+}
+
+.collab-page__production-text p {
+  max-width: 60ch;
+  color: var(--ink-2);
+}
+
+.collab-page__production-note {
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.collab-page__production-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-self: end;
+}
+
+@media (min-width: 800px) {
+  .collab-page__compare-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .collab-page__terms {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1000px) {
+  .collab-page__production {
+    grid-template-columns: minmax(0, 1.5fr) auto;
+    align-items: end;
+  }
+}

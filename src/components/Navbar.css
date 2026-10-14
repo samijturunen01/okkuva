@@ -95,12 +95,13 @@
 .navbar__list {
   display: flex;
   align-items: center;
-  gap: 2.1rem;
+  gap: clamp(1.1rem, 2.3vw, 2.1rem);
 }
 
 .navbar__link {
   position: relative;
   display: inline-block;
+  white-space: nowrap;
   padding: 0.5rem 0.05rem;
   font-weight: 600;
   font-size: 0.98rem;

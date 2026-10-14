@@ -2,9 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import App from './App.jsx'
+import { PAGE_ROUTES } from './routes.jsx'
 import './styles/index.css'
 
-const KNOWN_ROUTES = new Set(['/', '/tulokset', '/ota-yhteytta'])
+const KNOWN_ROUTES = new Set(PAGE_ROUTES)
 const base = import.meta.env.BASE_URL
 
 const container = document.getElementById('root')

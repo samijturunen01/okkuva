@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "OKKUVA – lyhytvideoita yrityksille. Marketing website built with React + Vite.",
+  "description": "OKKUVA – Daniel, tarinankertoja ja videontekijä. Creator portfolio and collaboration site built with React + Vite.",
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",

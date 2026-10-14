@@ -40,7 +40,7 @@
 
 .hero__stage {
   position: relative;
-  width: clamp(250px, 50vw, 620px);
+  width: clamp(240px, 42vw, 540px);
   max-width: 100%;
   margin-bottom: clamp(0.5rem, 2vw, 1.25rem);
 }
@@ -85,10 +85,15 @@
 }
 
 .hero__title {
-  max-width: 13ch;
-  font-size: var(--fs-hero);
-  line-height: 0.95;
+  max-width: 100%;
+  font-size: clamp(2.5rem, 1.1rem + 5.4vw, 5.6rem);
+  line-height: 0.98;
   letter-spacing: -0.035em;
+}
+
+/* Each sentence starts on its own line. */
+.hero__line {
+  display: block;
 }
 
 .hero__word {
@@ -173,6 +178,12 @@
   }
   50% {
     transform: translateY(3px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__eyebrow-more {
+    display: none;
   }
 }
 

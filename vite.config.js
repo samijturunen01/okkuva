@@ -22,6 +22,9 @@ export default defineConfig(({ isSsrBuild }) => ({
     // duplicate ~36 MB of video on every build and briefly create (then remove)
     // dist-ssr/videos/*.mp4, which crashes a running dev server's file watcher.
     copyPublicDir: !isSsrBuild,
+    // Read by scripts/prerender.mjs to link each page's own CSS chunk in its
+    // static HTML (deleted after prerendering, never deployed).
+    manifest: !isSsrBuild,
     rollupOptions: {
       output: {
         manualChunks(id) {
