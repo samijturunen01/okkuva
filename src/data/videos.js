@@ -58,8 +58,8 @@ export const reelsAccount = {
 }
 
 /**
- * Daniel's own Instagram account for the overlay. `mark` is a square crop of
- * the site portrait – replace the file to use his actual profile picture.
+ * Daniel's own Instagram account for the overlay. `mark` is his Instagram
+ * profile picture (150×150) – replace the file to update it.
  */
 export const danielAccount = {
   handle: 'danielsilkin',
