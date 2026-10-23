@@ -23,11 +23,16 @@
  *   featured – order on the home page (1 = first). Only videos that have a
  *              poster are shown there, so pending entries never appear empty.
  *   stats    – real Instagram engagement, shown in the Reels-style overlay on
- *              the video ({ likes, comments, shares, saves }). REAL numbers only.
+ *              the video ({ likes, comments, reposts, shares, saves }). REAL
+ *              numbers only – leave out a metric that isn't known. A number
+ *              Instagram only shows rounded can be given as that exact text,
+ *              e.g. likes: '85,1 t.'.
  *   caption  – first line of the Instagram caption, shown under the username in
  *              the overlay. Keep it short and end it with "…" like Instagram's
  *              own truncation – the overlay only has room for 1–2 lines.
  *   account  – optional per-video override for `reelsAccount` below.
+ *   collaborators – for an Instagram collab post: how many other accounts
+ *              share it. Shown as "danielsilkin ja 2 muuta", without names.
  *
  * An entry without `poster` is shown as a "video lisätään pian" placeholder
  * card. Omit both `stats` and `caption` and no Reels overlay is rendered.
@@ -53,9 +58,8 @@ export const reelsAccount = {
 }
 
 /**
- * Daniel's own Instagram account for the overlay.
- * TODO (Daniel): lisää neliön muotoinen profiilikuva public/brand/daniel-avatar.jpg
- * ennen kuin käytät tätä videoissa, joilla on `stats` tai `caption`.
+ * Daniel's own Instagram account for the overlay. `mark` is a square crop of
+ * the site portrait – replace the file to use his actual profile picture.
  */
 export const danielAccount = {
   handle: 'danielsilkin',
@@ -66,20 +70,23 @@ export const danielAccount = {
 
 export const videos = [
   // --- Ihmisten tarinat ---------------------------------------------------
-  // TODO (Daniel): lisää kansikuva, video tai linkki julkaisuun. Jos video oli
-  // maksettu yhteistyö, vaihda kind: 'collab' ja lisää client.
+  // Danielin omia videoita (ei maksettuja yhteistöitä).
   {
     id: 'pulla-puoti',
     title: 'Joensuun Pulla Puoti',
     kind: 'own',
     concept: 'ihmisten-tarinat',
     description: 'Tarina Joensuun Pulla Puodin ja sen tekijöiden takaa.',
+    duration: '1:15',
     featured: 1,
-    src: null,
-    preview: null,
-    poster: null,
+    src: 'videos/pulla-puoti.mp4',
+    preview: 'videos/pulla-puoti-preview.mp4',
+    poster: 'videos/pulla-puoti-poster.webp',
     href: null,
     platform: 'Instagram',
+    account: danielAccount,
+    // Instagram näyttää tykkäykset vain pyöristettynä ("85,1 t.").
+    stats: { likes: '85,1 t.', comments: 390, reposts: 276, shares: 4458, saves: 1503 },
   },
   {
     id: 'herkkupaja',
@@ -87,12 +94,51 @@ export const videos = [
     kind: 'own',
     concept: 'ihmisten-tarinat',
     description: 'Tarina Joensuun Herkkupajan ja sen tekijöiden takaa.',
+    duration: '1:05',
     featured: 2,
-    src: null,
-    preview: null,
-    poster: null,
+    src: 'videos/herkkupaja.mp4',
+    preview: 'videos/herkkupaja-preview.mp4',
+    poster: 'videos/herkkupaja-poster.webp',
     href: null,
     platform: 'Instagram',
+    account: danielAccount,
+    stats: { likes: 3946, comments: 194, reposts: 41, shares: 355, saves: 186 },
+  },
+  {
+    // Jatkovideo: noin 350 000 katselua koskevat aiempaa videota, eivät tätä.
+    id: 'turtiaisen-kioski',
+    title: 'Turtiaisen kioski',
+    kind: 'own',
+    concept: 'ihmisten-tarinat',
+    description:
+      'Mitä kioskille kuuluu viraalivideon jälkeen? Daniel palaa kioskille kuulemaan, mitä tapahtui, kun aiempi video keräsi noin 350 000 katselua.',
+    duration: '1:26',
+    featured: 3,
+    src: 'videos/turtiaisen-kioski.mp4',
+    preview: 'videos/turtiaisen-kioski-preview.mp4',
+    poster: 'videos/turtiaisen-kioski-poster.webp',
+    href: null,
+    platform: 'Instagram',
+    account: danielAccount,
+    collaborators: 2,
+    stats: { likes: 912, comments: 48, reposts: 10, shares: 129, saves: 47 },
+  },
+
+  // --- Blessattu vai kokattu ------------------------------------------------
+  {
+    id: 'hammoodi-parturi',
+    title: 'Hammoodi Parturi',
+    kind: 'own',
+    concept: 'blessattu-vai-kokattu',
+    description: 'Sarjan ensimmäinen jakso: Daniel istahtaa Hammoodi Parturin tuoliin. Kokattu vai blessattu?',
+    duration: '0:37',
+    src: 'videos/hammoodi-parturi.mp4',
+    preview: 'videos/hammoodi-parturi-preview.mp4',
+    poster: 'videos/hammoodi-parturi-poster.webp',
+    href: null,
+    platform: 'Instagram',
+    account: danielAccount,
+    stats: { likes: 101, comments: 4, reposts: 2, shares: 26, saves: 7 },
   },
 
   // --- Tilaustyöt: VisitKarelia ------------------------------------------
@@ -106,7 +152,7 @@ export const videos = [
     kicker: 'Haastattelu',
     description: 'Alkuperäinen 70-luvun kioski ja sen omistaja kertovat tarinansa.',
     duration: '0:49',
-    featured: 3,
+    featured: 4,
     src: 'videos/kioski-70-luku.mp4',
     preview: 'videos/kioski-70-luku-preview.mp4',
     poster: 'videos/kioski-70-luku-poster.webp',
@@ -121,7 +167,7 @@ export const videos = [
     kicker: 'Kohde-esittely',
     description: 'Kierros Kolin lähellä sijaitsevassa Taiteilijakoti Paaterissa ja Eva Ryynäsen veistosten parissa.',
     duration: '1:09',
-    featured: 4,
+    featured: 5,
     src: 'videos/paateri-koli.mp4',
     preview: 'videos/paateri-koli-preview.mp4',
     poster: 'videos/paateri-koli-poster.webp',
@@ -136,7 +182,7 @@ export const videos = [
     kicker: 'Esitys',
     description: 'Euroviisukappale Liekinheitin esitettynä kirkossa.',
     duration: '0:57',
-    featured: 5,
+    featured: 6,
     src: 'videos/liekinheitin-kirkossa.mp4',
     preview: 'videos/liekinheitin-kirkossa-preview.mp4',
     poster: 'videos/liekinheitin-kirkossa-poster.webp',
@@ -151,7 +197,7 @@ export const videos = [
     kicker: 'Tapahtuma',
     description: 'Karjalaista kansanmusiikkia ja tanssia ulkoilmalavalla.',
     duration: '0:35',
-    featured: 6,
+    featured: 7,
     src: 'videos/karjalainen-kansanmusiikki.mp4',
     preview: 'videos/karjalainen-kansanmusiikki-preview.mp4',
     poster: 'videos/karjalainen-kansanmusiikki-poster.webp',

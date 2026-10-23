@@ -53,13 +53,13 @@ export const concepts = [
     id: 'blessattu-vai-kokattu',
     number: '03',
     title: 'Blessattu vai kokattu',
-    status: 'coming',
+    status: 'active',
     tagline: 'Parturin tuoli, sakset ja jännittävä lopputulos.',
     summary:
       'Uusi konsepti, jossa Daniel kokeilee partureita ja hiustenleikkuukokemuksia. Onko lopputulos blessattu vai kokattu?',
     description: [
       'Blessattu vai kokattu on Danielin uusin konsepti, jossa hän kokeilee partureita ja hiustenleikkuukokemuksia.',
-      'Konsepti on vielä työn alla, ja ensimmäiset jaksot ovat tulossa. Seuraa Danielia somessa, niin näet ensimmäisenä, miten käy.',
+      'Ensimmäinen jakso on nyt katsottavissa. Seuraa Danielia somessa, niin näet ensimmäisenä, miten seuraavassa parturituolissa käy.',
     ],
     themes: ['Parturit', 'Hiustenleikkuu', 'Kokeilut'],
     verdicts: ['Blessattu 😇', 'Kokattu 🔥'],

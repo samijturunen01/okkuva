@@ -146,6 +146,16 @@ export const ShareIcon = (props) => (
   </svg>
 )
 
+/** Two looping arrows, as Instagram's repost action. */
+export const RepostIcon = (props) => (
+  <svg {...base} {...props}>
+    <path d="M17 2.8 20.2 6 17 9.2" />
+    <path d="M3.8 11V9a3 3 0 0 1 3-3h13.4" />
+    <path d="M7 21.2 3.8 18 7 14.8" />
+    <path d="M20.2 13v2a3 3 0 0 1-3 3H3.8" />
+  </svg>
+)
+
 export const BookmarkIcon = (props) => (
   <svg {...base} {...props}>
     <path d="M6 3.7h12a.8.8 0 0 1 .8.8v15.3L12 15.6l-6.8 4.2V4.5a.8.8 0 0 1 .8-.8Z" />
@@ -186,6 +196,7 @@ const byName = {
   heart: HeartIcon,
   comment: CommentIcon,
   share: ShareIcon,
+  repost: RepostIcon,
   bookmark: BookmarkIcon,
   more: MoreIcon,
 }

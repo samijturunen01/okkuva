@@ -18,7 +18,7 @@ export default function Videos() {
   useSeo({
     title: 'Videot & konseptit',
     description:
-      'Danielin videokonseptit: Ihmisten tarinat, Jatkoon vai ei ja tulossa oleva Blessattu vai kokattu. Tarinoita ihmisten, yritysten ja kokemusten takaa.',
+      'Danielin videokonseptit: Ihmisten tarinat, Jatkoon vai ei ja Blessattu vai kokattu. Tarinoita ihmisten, yritysten ja kokemusten takaa.',
     path: VIDEOS_PATH,
   })
 

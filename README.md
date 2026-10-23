@@ -136,8 +136,13 @@ Then add an entry to `src/data/videos.js` (or fill in a pending one, e.g.
   preview: 'videos/kesakampanja-2026-preview.mp4',
   poster: 'videos/kesakampanja-2026-poster.webp',
   // Valinnainen: Instagramin todelliset luvut videon päälle (Reels-tyylinen
-  // kerros). Jätä pois, jos lukuja ei ole.
-  stats: { likes: 1234, comments: 56, shares: 78, saves: 90 },
+  // kerros). Jätä pois, jos lukuja ei ole – puuttuva luku jätetään pois.
+  // Instagramin pyöristämän luvun voi antaa tekstinä, esim. likes: '85,1 t.'.
+  stats: { likes: 1234, comments: 56, reposts: 12, shares: 78, saves: 90 },
+  // Valinnainen: Danielin omalla tilillä julkaistut videot.
+  account: danielAccount,
+  // Valinnainen: yhteisjulkaisu – muiden tilien määrä ("ja 2 muuta").
+  collaborators: 2,
   // Valinnainen: kuvatekstin ensimmäinen rivi, näkyy käyttäjätunnuksen alla.
   // Pidä lyhyenä ja päätä "…"-merkkiin kuten Instagramissa – tilaa on 1–2 riviä.
   caption: 'Lyhyt kuvaus somessa, …',
@@ -160,7 +165,7 @@ its entry (and the files).
 
 Jokaisen videon päälle piirretään Reels-tyylinen käyttöliittymä
 (`src/components/video/ReelsOverlay.jsx`): oikeassa reunassa sydän, kommentti,
-jako, tallennus + luvut, kolme pistettä ja tilin neliömerkki, vasemmassa
+uudelleenjulkaisu, jako, tallennus + luvut, kolme pistettä ja tilin neliömerkki, vasemmassa
 alareunassa profiilikuva, käyttäjätunnus, "Seuraa" ja kuvateksti. Sama kerros
 renderöidään sekä kortille että suurennettuun modaalisoittimeen, ja se on
 kokonaan `pointer-events: none` – klikkaus menee aina läpi videon avaamiseen.
@@ -170,6 +175,8 @@ Tili (käyttäjätunnus ja logo) tulee `reelsAccount`-objektista
 (neliö, 150×150 tai isompi); korvaa tiedosto tai osoita `mark` toiseen
 tiedostoon, niin merkki vaihtuu sekä profiilikuvaan että oikean reunan
 neliöön. Käytä tiedostonimessä vain pieniä kirjaimia ja väliviivoja.
+Danielin omien videoiden tili on `danielAccount` (kuva
+`public/brand/daniel-avatar.jpg`), joka valitaan videolle `account`-kentällä.
 
 > The original `.mov` files in the project root are ignored by git (see
 > `.gitignore`) – only the optimized versions in `public/videos` are deployed.

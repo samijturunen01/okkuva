@@ -171,20 +171,20 @@ a.video-card__button {
   font-size: var(--fs-small);
 }
 
-.sheet .video-card__heading {
+.sheet:not(.sheet--tint) .video-card__heading {
   color: var(--on-dark);
 }
 
-.sheet .video-card__desc {
+.sheet:not(.sheet--tint) .video-card__desc {
   color: var(--on-dark-2);
 }
 
-.sheet .video-card__badge {
+.sheet:not(.sheet--tint) .video-card__badge {
   color: var(--on-dark-2);
   box-shadow: inset 0 0 0 1.5px var(--line-on-dark);
 }
 
-.sheet .video-card__badge--collab {
+.sheet:not(.sheet--tint) .video-card__badge--collab {
   color: var(--ink);
   box-shadow: none;
 }
